@@ -9,7 +9,6 @@ import Modelos.Articulos;
 import Modelos.FacturasCab;
 import Modelos.FacturasLin;
 import Modelos.FacturasTot;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -249,53 +248,5 @@ public class Ctrl_Facturas {
         }
         return f;
     }
-
-   /* public void calculoTotal(FacturasCab fc) {
-
-        List<FacturasLin> facturasLinList = facturasLinList(fc.getNumfac());
-        BigDecimal baseTotal = BigDecimal.ZERO;
-        BigDecimal dtoTotal = BigDecimal.ZERO;
-        BigDecimal ivaTotal = BigDecimal.ZERO;
-        BigDecimal totalFac = BigDecimal.ZERO;
-
-        for (FacturasLin fl : facturasLinList) {
-
-            if (fc.getNumfac() == fl.getId().getNumfac()) {
-                BigDecimal total = null;
-                BigDecimal p = fl.getPrecio();
-                BigDecimal c = fl.getCantidad();
-                BigDecimal descuento = fl.getDtolinea();
-                BigDecimal ivaL = fl.getIvalinea();
-
-                BigDecimal base = p.multiply(c);
-                BigDecimal dto = base.multiply(descuento.multiply(BigDecimal.valueOf(0.01)));
-                BigDecimal iva = (base.subtract(dto)).multiply(ivaL.multiply(BigDecimal.valueOf(0.01)));
-                total = base.add(iva);
-
-                baseTotal = baseTotal.add(base);
-                dtoTotal = dtoTotal.add(dto);
-                ivaTotal = ivaTotal.add(iva);
-                totalFac = totalFac.add(total);
-                System.out.println(fl.getId().getLineafac());
-            }
-        }
-
-        FacturasTot ft = new FacturasTot(fc,baseTotal, ivaTotal, ivaTotal, totalFac);
-
-        ft.setFacturasCab(fc);
-        ft.setNumfac(fc.getNumfac());
-        ft.setBaseimp(baseTotal);
-        ft.setImpDto(dtoTotal);
-        ft.setImpIva(ivaTotal);
-        ft.setTotalfac(totalFac);
-
-        if (addToFacturaTot(ft) == false) {
-
-        } else {
-
-            modifyFacturaTot(ft);
-        }
-
-    }*/
 
 }

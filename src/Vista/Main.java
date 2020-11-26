@@ -157,7 +157,7 @@ public class Main extends javax.swing.JFrame {
         showTableFacturasLin();
         showTableFacturasTot();
         cc.fillComboBox(cbClientesDisponibles);
-        cf.fillComboNumFac(cbNumFac);
+        //cf.fillComboNumFac(cbNumFac);
         cf.fillComboDescripcion(cbDescripcion);
         cf.fillComboRef(cbRef);
 
@@ -279,10 +279,11 @@ public class Main extends javax.swing.JFrame {
         btAddLin = new javax.swing.JButton();
         btDeleteLin = new javax.swing.JButton();
         btModifyLin = new javax.swing.JButton();
-        cbNumFac = new javax.swing.JComboBox<>();
         cbDescripcion = new javax.swing.JComboBox<>();
         cbRef = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        lbNumFac = new javax.swing.JLabel();
+        btCalculoLineas = new javax.swing.JButton();
         menuBar4 = new javax.swing.JMenuBar();
         menuOpciones4 = new javax.swing.JMenu();
         itemCli1 = new javax.swing.JMenuItem();
@@ -1096,8 +1097,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        cbNumFac.setMaximumRowCount(20);
-
         cbDescripcion.setMaximumRowCount(20);
         cbDescripcion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         cbDescripcion.addActionListener(new java.awt.event.ActionListener() {
@@ -1111,14 +1110,21 @@ public class Main extends javax.swing.JFrame {
 
         jLabel11.setText("Descripcion");
 
+        btCalculoLineas.setText("Calcular Factura");
+        btCalculoLineas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCalculoLineasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btAddLin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1128,40 +1134,40 @@ public class Main extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btModifyLin))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel9Layout.createSequentialGroup()
-                                    .addComponent(jLabel18)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel9Layout.createSequentialGroup()
-                                    .addComponent(jLabel19)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel9Layout.createSequentialGroup()
-                                    .addComponent(jLabel20)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                                    .addComponent(txDto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel9Layout.createSequentialGroup()
-                                    .addComponent(jLabel21)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txIva, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel9Layout.createSequentialGroup()
+                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel18)
+                                            .addComponent(jLabel19)
+                                            .addComponent(jLabel20))
+                                        .addGap(34, 34, 34))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                                        .addComponent(jLabel21)
+                                        .addGap(79, 79, 79)))
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txIva, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txDto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel16)
                                     .addComponent(jLabel12)
                                     .addComponent(jLabel11)
                                     .addComponent(jLabel17))
-                                .addGap(36, 36, 36)
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbRef, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txLineaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGap(113, 113, 113)
-                                .addComponent(cbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(17, 17, 17)))
+                                    .addComponent(cbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txLineaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel9Layout.createSequentialGroup()
+                                        .addComponent(lbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btCalculoLineas)))))
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(161, 161, 161))
         );
@@ -1174,15 +1180,18 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addGap(1, 1, 1)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btAddLin)
-                            .addComponent(btDeleteLin)
-                            .addComponent(btModifyLin))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(cbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btAddLin)
+                                    .addComponent(btDeleteLin)
+                                    .addComponent(btModifyLin))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(lbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btCalculoLineas))
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(txLineaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1194,20 +1203,24 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel17))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18))
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel18)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel19)
                             .addComponent(txPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
                             .addComponent(txDto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21)
                             .addComponent(txIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(9, Short.MAX_VALUE))
@@ -1274,7 +1287,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jdLineaFacturaLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(10, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1693,6 +1706,7 @@ public class Main extends javax.swing.JFrame {
         if (modelLin.getRowCount() == -1) {
             Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
             FacturasCab fc = cf.getNumFacCab(numFac);
+            lbNumFac.setText(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
             List listaLineaFactura = new ArrayList(fc.getFacturasLins());
             if (listaLineaFactura != null) {
                 for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
@@ -1714,6 +1728,7 @@ public class Main extends javax.swing.JFrame {
             modelLin.setRowCount(0);
             Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
             FacturasCab fc = cf.getNumFacCab(numFac);
+            lbNumFac.setText(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
             List listaLineaFactura = new ArrayList(fc.getFacturasLins());
             if (listaLineaFactura != null) {
                 for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
@@ -1732,19 +1747,6 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-        /*
-        Facturas total
-         */
-        //FacturasCab facturasCab, BigDecimal baseimp, BigDecimal impDto, BigDecimal impIva, BigDecimal totalfac
-        modelTot.setRowCount(0);
-        Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
-        FacturasCab fc = cf.getNumFacCab(numFac);
-        FacturasTot ft = new FacturasTot(fc,fc.getBaseImp(),fc.getDto(),fc.getIvaTotal(),fc.getTotal());
-
-        modelTot.addRow(new Object[]{
-            fc.getNumfac(),fc.getBaseImp(),fc.getDto(),fc.getIvaTotal(),fc.getTotal()
-        });
-
 
     }//GEN-LAST:event_jTableCabMouseClicked
 
@@ -1761,7 +1763,7 @@ public class Main extends javax.swing.JFrame {
         try {
             Clientes c = cc.getClientesDni((String) cbClientesDisponibles.getSelectedItem());
             FacturasCab f = new FacturasCab(Long.parseLong(txNumFacCab.getText()), c);
-            FacturasTot ft = new FacturasTot(f);
+            FacturasTot ft = new FacturasTot(f, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ONE);
             HashSet hs = new HashSet();
             FacturasCab f2 = new FacturasCab();
             Date date = new Date();
@@ -1770,10 +1772,9 @@ public class Main extends javax.swing.JFrame {
             if (!txFecha.getText().isEmpty()) {
                 if (cf.addFacturasCab(f2)) {
                     if (!txNumFacCab.getText().isEmpty()) {
+                        cf.addToFacturaTot(ft);
                         modelFac.setRowCount(0);
                         modelFac.addRow(new Object[]{f2.getNumfac(), f2.getFechaFormat(), f2.getClientes().getDnicif(), f2.getFacturasTot(), f2.getFacturasLins()});
-                        cbNumFac.removeAllItems();
-                        cf.fillComboNumFac(cbNumFac);
                         cbDescripcion.removeAllItems();
                         cbRef.removeAllItems();
                         cf.fillComboDescripcion(cbDescripcion);
@@ -1895,9 +1896,10 @@ public class Main extends javax.swing.JFrame {
         try {
             FacturasLin fl = new FacturasLin();
             Long nl = Long.valueOf(txLineaFac.getText());
-            FacturasLinId fli = new FacturasLinId((Long) cbNumFac.getSelectedItem(), nl);
+            //FacturasLinId fli = new FacturasLinId((Long) cbNumFac.getSelectedItem(), nl);
+            FacturasLinId fli = new FacturasLinId(Long.parseLong(lbNumFac.getText()) , nl);
             Articulos a = ca.getRefArticulo((String) cbRef.getSelectedItem());
-            FacturasCab fc = cf.getNumFacCab((Long) cbNumFac.getSelectedItem());
+            FacturasCab fc = cf.getNumFacCab(Long.parseLong(lbNumFac.getText()));
             BigDecimal can = fl.getFormattedCantidad(txCantidad.getText());
             BigDecimal precio = fl.getFormattedPrecio(txPrecio.getText());
             BigDecimal dto = fl.getFormattedDto(txDto.getText());
@@ -1960,7 +1962,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btDeleteLinActionPerformed
 
     private void btModifyLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifyLinActionPerformed
-        
+
     }//GEN-LAST:event_btModifyLinActionPerformed
 
     private void cbDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDescripcionActionPerformed
@@ -1970,8 +1972,28 @@ public class Main extends javax.swing.JFrame {
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
 
-       
+        /*
+        Facturas total
+         */
+        modelTot.setRowCount(0);
+        Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
+        FacturasCab fc = cf.getNumFacCab(numFac);
+        modelTot.addRow(new Object[]{
+            fc.getNumfac(), fc.getBaseImp(), fc.getDto(), fc.getIvaTotal(), fc.getTotal()
+        });
+
     }//GEN-LAST:event_btCalcularActionPerformed
+
+    private void btCalculoLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalculoLineasActionPerformed
+        jdLineaFactura.setVisible(false);
+        jdFacturas.setVisible(true);
+        modelTot.setRowCount(0);
+        Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
+        FacturasCab fc = cf.getNumFacCab(numFac);
+        modelTot.addRow(new Object[]{
+            fc.getNumfac(), fc.getBaseImp(), fc.getDto(), fc.getIvaTotal(), fc.getTotal()
+        });
+    }//GEN-LAST:event_btCalculoLineasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2023,6 +2045,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btBuscarCli;
     private javax.swing.JButton btBuscarFac;
     private javax.swing.JButton btCalcular;
+    private javax.swing.JButton btCalculoLineas;
     private javax.swing.JButton btDeleteArt;
     private javax.swing.JButton btDeleteCli;
     private javax.swing.JButton btDeleteFac;
@@ -2035,7 +2058,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btModifyLin;
     private javax.swing.JComboBox<String> cbClientesDisponibles;
     private javax.swing.JComboBox<String> cbDescripcion;
-    private javax.swing.JComboBox<String> cbNumFac;
     private javax.swing.JComboBox<String> cbRef;
     private javax.swing.JMenuItem itemCli;
     private javax.swing.JMenuItem itemCli1;
@@ -2112,6 +2134,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog jdClientes;
     private javax.swing.JDialog jdFacturas;
     private javax.swing.JDialog jdLineaFactura;
+    private javax.swing.JLabel lbNumFac;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuBar menuBar1;
     private javax.swing.JMenuBar menuBar2;
