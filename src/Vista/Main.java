@@ -41,6 +41,9 @@ public class Main extends javax.swing.JFrame {
     DefaultTableModel modelArt;
     String[] columnasArt = {"Referencia", "Descripción", "Precio", "IVA", "Cantidad Stock"};
 
+    /*
+    Nos muestra las columnas y la informacion de la tabla Artículos
+    */
     public void showTableArticulos() {
         modelArt = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -59,6 +62,9 @@ public class Main extends javax.swing.JFrame {
         jTableArticulo.setModel(modelArt);
     }
 
+    /*
+    Nos muestra las columnas y la informacion de la tabla Clientes
+    */
     DefaultTableModel modelCli;
     String[] columnasCli = {"DNI-CIF", "Nombre"};
 
@@ -77,6 +83,10 @@ public class Main extends javax.swing.JFrame {
 
         jTableClientes.setModel(modelCli);
     }
+    
+    /*
+    Nos muestra las columnas y la informacion de la tabla Facturas
+    */
     DefaultTableModel modelFac;
     String[] columnasFac = {"NºFactura", "Fecha", "DNI-CIF"};
 
@@ -95,6 +105,10 @@ public class Main extends javax.swing.JFrame {
         }
         jTableCab.setModel(modelFac);
     }
+    
+    /*
+    Nos muestra las columnas de la tabla Linea de facturas
+    */
     DefaultTableModel modelLin;
     String[] columnasLin = {"NºFactura", "Linea factura", "Referencia", "Cantidad", "Precio", "Descuento", "IVA linea"};
 
@@ -114,6 +128,10 @@ public class Main extends javax.swing.JFrame {
 
         jTableLinea.setModel(modelLin);
     }
+    
+    /*
+    Nos muestra las columnas y la informacion de la tabla de totales
+    */
     DefaultTableModel modelTot;
     String[] columnasTot = {"NºFactura", "Base imponible", "Importe descuento", "Importe IVA", "Total factura"};
 
@@ -1561,7 +1579,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btAddArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddArtActionPerformed
         /*
-        Añadir articulos
+        Añadimos la informacion en los campos y la recogemos para añadir un artículo
          */
         try {
             Articulos a = new Articulos();
@@ -1602,7 +1620,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btDeleteArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteArtActionPerformed
         /*
-        Eliminar artículos
+        Obtenemos los valores para eliminar al estar obligados a selecionar un registro
          */
         try {
             int i = jTableArticulo.getSelectedRow();
@@ -1643,7 +1661,8 @@ public class Main extends javax.swing.JFrame {
 
     private void btModArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModArtActionPerformed
         /*
-        Modificar articulos
+        Obtendremos los valores de los campos de introduccion de informacion de artículo
+        estamos obligados a seleccionar una registro de la tabla
          */
         try {
             Articulos a = new Articulos();
@@ -1772,7 +1791,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btAddFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddFacActionPerformed
         /*
-        Añadimos una nueva factura
+        Obtenemos los valores de los campos para añadir una nueva factura
          */
 
         try {
@@ -1857,7 +1876,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btDeleteFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteFacActionPerformed
         /*
-        Eliminamos factura cabecera
+        Obtenemos los valores de una fila selecionada para eliminar la factura
          */
         try {
             int i = jTableCab.getSelectedRow();
@@ -1880,7 +1899,8 @@ public class Main extends javax.swing.JFrame {
 
     private void btModifyFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifyFacActionPerformed
         /*
-        Modificar factura
+        Se deberá selecionar un registro de la tabla, luego obtendremos los valores de los campos
+        de introduccion de informacion para ser modificada la fatura.
          */
         try {
             FacturasCab fc = new FacturasCab();
@@ -1942,8 +1962,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btAddLinActionPerformed
 
     private void btDeleteLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteLinActionPerformed
-        //FacturasLinId id, Articulos articulos, FacturasCab facturasCab, BigDecimal cantidad, BigDecimal precio, BigDecimal dtolinea, BigDecimal ivalinea    
         try {
+            /*
+            Recogemos los valores de una fila seleccionada para eliminar ese objeto linea
+            */
+                   
             int i = jTableLinea.getSelectedRow();
             FacturasLin fl = new FacturasLin();
             Long numFac = (Long) modelLin.getValueAt(i, 0);
@@ -2026,7 +2049,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
         /*
-        Facturas total
+        Caculamos una factura seleccionada en la ventana de Facturas
          */
         try {
             modelTot.setRowCount(0);
@@ -2043,6 +2066,9 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btCalcularActionPerformed
 
     private void btCalculoLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalculoLineasActionPerformed
+        /*
+        Caculamos una factura seleccionada en la ventana de Linea de Facturas
+         */
         try {
             if (!lbNumFac.getText().isEmpty()) {
                 jdLineaFactura.setVisible(false);
@@ -2078,6 +2104,9 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableLineaMouseClicked
 
     private void btActualizarLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarLineasActionPerformed
+        /*
+        Nos actualiza la tabla de Linea de facturas, para ver las modificaciones
+        */
         try {
             modelLin.setRowCount(0);
             FacturasCab fc = cf.getNumFacCab(Long.parseLong(lbNumFac.getText()));
