@@ -140,19 +140,6 @@ public class Ctrl_Facturas {
         return f;
     }
     
-    public FacturasLin getNumFacLin(FacturasLinId fli) {
-        FacturasLin f = new FacturasLin();
-        try {
-            operar();
-            f = (FacturasLin) ss.get(FacturasLin.class, fli);
-        } catch (HibernateException he) {
-            JOptionPane.showMessageDialog(null, "" + he.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            ss.close();
-        }
-        return f;
-    }
-
     public void fillComboDescripcion(JComboBox cb) {
         List<Articulos> lista = new ArrayList<Articulos>();
         try {
