@@ -283,6 +283,7 @@ public class Main extends javax.swing.JFrame {
         lbNumFac = new javax.swing.JLabel();
         btCalculoLineas = new javax.swing.JButton();
         lbRef = new javax.swing.JLabel();
+        btActualizarLineas = new javax.swing.JButton();
         menuBar4 = new javax.swing.JMenuBar();
         menuOpciones4 = new javax.swing.JMenu();
         itemCli1 = new javax.swing.JMenuItem();
@@ -1113,6 +1114,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btActualizarLineas.setText("Actualizar");
+        btActualizarLineas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btActualizarLineasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -1128,7 +1136,10 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(btDeleteLin)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btModifyLin))))
+                                .addComponent(btModifyLin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btActualizarLineas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
@@ -1186,7 +1197,8 @@ public class Main extends javax.swing.JFrame {
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btAddLin)
                                     .addComponent(btDeleteLin)
-                                    .addComponent(btModifyLin))
+                                    .addComponent(btModifyLin)
+                                    .addComponent(btActualizarLineas))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1939,9 +1951,9 @@ public class Main extends javax.swing.JFrame {
             FacturasLinId fli = new FacturasLinId(numFac, nLinea);
             FacturasCab fc = cf.getNumFacCab(numFac);
             String ref = (String) modelLin.getValueAt(i, 2);
-            
+
             Articulos a = ca.getRefArticulo(ref);
-            
+
             BigDecimal can = fl.getFormattedCantidad(modelLin.getValueAt(i, 3).toString());
             BigDecimal precio = fl.getFormattedPrecio(modelLin.getValueAt(i, 4).toString());
             BigDecimal descuento = fl.getFormattedDto(modelLin.getValueAt(i, 5).toString());
@@ -1969,21 +1981,21 @@ public class Main extends javax.swing.JFrame {
     private void btModifyLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifyLinActionPerformed
 
         try {
+
             FacturasLin fl = new FacturasLin();
+
             //Definimos el ID de la fila
             FacturasLinId fli = new FacturasLinId();
             Long numFac = Long.valueOf(lbNumFac.getText());
             fli.setNumfac(numFac);
             Long nLinea = Long.valueOf(txLineaFac.getText());
             fli.setLineafac(nLinea);
-            
+
             //Elegimos la modificacion de articulo
             String ref = cbRef.getSelectedItem().toString();
             Articulos a = ca.getRefArticulo(ref);
             fl.getArticulos();
-           
-            
-            
+
             FacturasCab fc = cf.getNumFacCab(numFac);
             //Recogemos valores cantidad, precio, descuento e IVA
             BigDecimal can = fl.getFormattedCantidad(txCantidad.getText());
@@ -1991,10 +2003,8 @@ public class Main extends javax.swing.JFrame {
             BigDecimal descuento = fl.getFormattedDto(txDto.getText());
             BigDecimal ivaLinea = fl.getFormattedIvaLinea(txIva.getText());
 
-            
-            
             fl = new FacturasLin(fli, a, fc, can, precio, descuento, ivaLinea);
-            
+
             //modificamos el stock y actualizamos tabla articulos
             a.setStock(a.getStock().subtract(can));
             ca.modifyArticulos(a);
@@ -2015,28 +2025,42 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_cbDescripcionActionPerformed
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-
         /*
         Facturas total
          */
-        modelTot.setRowCount(0);
-        Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
-        FacturasCab fc = cf.getNumFacCab(numFac);
-        modelTot.addRow(new Object[]{
-            fc.getNumfac(), fc.getBaseImp(), fc.getDto(), fc.getIvaTotal(), fc.getTotal()
-        });
+        try {
+            modelTot.setRowCount(0);
+            Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
+            FacturasCab fc = cf.getNumFacCab(numFac);
+            modelTot.addRow(new Object[]{
+                fc.getNumfac(), fc.getBaseImp(), fc.getDto(), fc.getIvaTotal(), fc.getTotal()
+            });
+        } catch (ArrayIndexOutOfBoundsException a) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una factura para calcular su total");
+        }
+
 
     }//GEN-LAST:event_btCalcularActionPerformed
 
     private void btCalculoLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalculoLineasActionPerformed
-        jdLineaFactura.setVisible(false);
-        jdFacturas.setVisible(true);
-        modelTot.setRowCount(0);
-        Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
-        FacturasCab fc = cf.getNumFacCab(numFac);
-        modelTot.addRow(new Object[]{
-            fc.getNumfac(), fc.getBaseImp(), fc.getDto(), fc.getIvaTotal(), fc.getTotal()
-        });
+        try {
+            if (!lbNumFac.getText().isEmpty()) {
+                jdLineaFactura.setVisible(false);
+                jdFacturas.setVisible(true);
+                modelTot.setRowCount(0);
+                Long numFac = Long.parseLong(lbNumFac.getText());
+                FacturasCab fc = cf.getNumFacCab(numFac);
+                modelTot.addRow(new Object[]{
+                    fc.getNumfac(), fc.getBaseImp(), fc.getDto(), fc.getIvaTotal(), fc.getTotal()
+                });
+            } else {
+                JOptionPane.showMessageDialog(null, "Debes elegir una factura en la ventana de facturas para calcular el total");
+            }
+
+        } catch (NumberFormatException n) {
+
+        }
+
     }//GEN-LAST:event_btCalculoLineasActionPerformed
 
     private void jTableLineaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLineaMouseClicked
@@ -2052,6 +2076,28 @@ public class Main extends javax.swing.JFrame {
         txDto.setText(modelLin.getValueAt(i, 5).toString());
         txIva.setText(modelLin.getValueAt(i, 6).toString());
     }//GEN-LAST:event_jTableLineaMouseClicked
+
+    private void btActualizarLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarLineasActionPerformed
+        try {
+            modelLin.setRowCount(0);
+            FacturasCab fc = cf.getNumFacCab(Long.parseLong(lbNumFac.getText()));
+            List listaLineaFactura = new ArrayList(fc.getFacturasLins());
+            for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
+                FacturasLin factLin = (FacturasLin) it.next();
+
+                modelLin.addRow(new Object[]{
+                    factLin.getFacturasCab().getNumfac(),
+                    factLin.getId().getLineafac(),
+                    factLin.getArticulos().getReferencia(),
+                    factLin.getCantidad().toString(),
+                    factLin.getPrecio().toString(),
+                    factLin.getDtolinea().toString(),
+                    factLin.getIvalinea()});
+            }
+        } catch (NumberFormatException n) {
+        }
+
+    }//GEN-LAST:event_btActualizarLineasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2095,6 +2141,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btActualizarArt;
     private javax.swing.JButton btActualizarCli;
+    private javax.swing.JButton btActualizarLineas;
     private javax.swing.JButton btAddArt;
     private javax.swing.JButton btAddCli;
     private javax.swing.JButton btAddFac;

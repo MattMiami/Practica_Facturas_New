@@ -1066,6 +1066,9 @@
                                       <Component id="btDeleteLin" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btModifyLin" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="btActualizarLineas" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1145,6 +1148,7 @@
                                           <Component id="btAddLin" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="btDeleteLin" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="btModifyLin" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btActualizarLineas" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1346,6 +1350,14 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbRef">
+            </Component>
+            <Component class="javax.swing.JButton" name="btActualizarLineas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Actualizar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btActualizarLineasActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
