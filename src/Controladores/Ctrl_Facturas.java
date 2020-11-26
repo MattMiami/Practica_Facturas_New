@@ -8,6 +8,7 @@ package Controladores;
 import Modelos.Articulos;
 import Modelos.FacturasCab;
 import Modelos.FacturasLin;
+import Modelos.FacturasLinId;
 import Modelos.FacturasTot;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +139,19 @@ public class Ctrl_Facturas {
         }
         return f;
     }
+    
+    public FacturasLin getNumFacLin(FacturasLinId fli) {
+        FacturasLin f = new FacturasLin();
+        try {
+            operar();
+            f = (FacturasLin) ss.get(FacturasLin.class, fli);
+        } catch (HibernateException he) {
+            JOptionPane.showMessageDialog(null, "" + he.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            ss.close();
+        }
+        return f;
+    }
 
     public void fillComboDescripcion(JComboBox cb) {
         List<Articulos> lista = new ArrayList<Articulos>();
@@ -186,15 +200,16 @@ public class Ctrl_Facturas {
         return facturasLinList;
     }
 
-    public boolean modifyFacturaTot(FacturasTot ft) {
+ public boolean modifyFacturaLin(FacturasLin f) {
         boolean result;
         try {
             operar();
-            ss.saveOrUpdate(ft);
+            ss.update(f);
             ss.getTransaction().commit();
             result = true;
+             JOptionPane.showMessageDialog(null, "Linea de factura modificada correctamente.");
         } catch (HibernateException he) {
-            JOptionPane.showMessageDialog(null, "" + he.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debes modificar una factura existente.", "Error", JOptionPane.ERROR_MESSAGE);
             result = false;
         } finally {
             ss.close();

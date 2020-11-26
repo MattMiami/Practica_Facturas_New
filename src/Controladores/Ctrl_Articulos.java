@@ -90,7 +90,7 @@ public class Ctrl_Articulos {
             ss.update(a);
             ss.getTransaction().commit();
             result = true;
-            JOptionPane.showMessageDialog(null, "Modificado correctamente");
+            JOptionPane.showMessageDialog(null, "Artículo modificado correctamente");
         } catch (HibernateException he) {
             JOptionPane.showMessageDialog(null, "Error al modificar, sólo puedes modificar un artículo que ya exista.", "Error", JOptionPane.ERROR_MESSAGE);
             result = false;

@@ -157,7 +157,7 @@ public class Main extends javax.swing.JFrame {
         showTableFacturasTot();
         cc.fillComboBox(cbClientesDisponibles);
         cf.fillComboDescripcion(cbDescripcion);
-        //cf.fillComboRef(cbRef);
+        cf.fillComboRef(cbRef);
 
     }
 
@@ -1049,6 +1049,11 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableLinea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableLineaMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTableLinea);
 
         jLabel14.setText("Linea Facturas");
@@ -1183,9 +1188,9 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(btDeleteLin)
                                     .addComponent(btModifyLin))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(lbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12)))
                             .addComponent(btCalculoLineas))
                         .addGap(12, 12, 12)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1196,10 +1201,11 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(cbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17)
-                            .addComponent(lbRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbRef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cbRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel17)))
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -1925,46 +1931,87 @@ public class Main extends javax.swing.JFrame {
 
     private void btDeleteLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteLinActionPerformed
         //FacturasLinId id, Articulos articulos, FacturasCab facturasCab, BigDecimal cantidad, BigDecimal precio, BigDecimal dtolinea, BigDecimal ivalinea    
-        int i = jTableLinea.getSelectedRow();
-        FacturasLin fl = new FacturasLin();
-        Long numFac = (Long) modelLin.getValueAt(i, 0);
-        Long nLinea = (Long) modelLin.getValueAt(i, 1);
+        try {
+            int i = jTableLinea.getSelectedRow();
+            FacturasLin fl = new FacturasLin();
+            Long numFac = (Long) modelLin.getValueAt(i, 0);
+            Long nLinea = (Long) modelLin.getValueAt(i, 1);
+            FacturasLinId fli = new FacturasLinId(numFac, nLinea);
+            FacturasCab fc = cf.getNumFacCab(numFac);
+            String ref = (String) modelLin.getValueAt(i, 2);
+            
+            Articulos a = ca.getRefArticulo(ref);
+            
+            BigDecimal can = fl.getFormattedCantidad(modelLin.getValueAt(i, 3).toString());
+            BigDecimal precio = fl.getFormattedPrecio(modelLin.getValueAt(i, 4).toString());
+            BigDecimal descuento = fl.getFormattedDto(modelLin.getValueAt(i, 5).toString());
+            BigDecimal ivaLinea = fl.getFormattedIvaLinea(modelLin.getValueAt(i, 6).toString());
 
-        FacturasLinId fli = new FacturasLinId(numFac, nLinea);
-        FacturasCab fc = cf.getNumFacCab(numFac);
+            fl.setId(fli);
+            fl.setArticulos(a);
+            fl.setFacturasCab(fc);
+            fl.setCantidad(can);
+            fl.setPrecio(precio);
+            fl.setDtolinea(descuento);
+            fl.setIvalinea(ivaLinea);
 
-        String ref = (String) modelLin.getValueAt(i, 2);
-        Articulos a = ca.getRefArticulo(ref);
+            fl = new FacturasLin(fli, a, fc, can, precio, descuento, ivaLinea);
 
-        BigDecimal can = fl.getFormattedCantidad(modelLin.getValueAt(i, 3).toString());
-        BigDecimal precio = fl.getFormattedPrecio(modelLin.getValueAt(i, 4).toString());
-        BigDecimal descuento = fl.getFormattedDto(modelLin.getValueAt(i, 5).toString());
-        BigDecimal ivaLinea = fl.getFormattedIvaLinea(modelLin.getValueAt(i, 6).toString());
+            cf.deleteFacturasLin(fl);
+            modelLin.removeRow(i);
+        } catch (ArrayIndexOutOfBoundsException a) {
+            JOptionPane.showMessageDialog(null, "Asegúrese de elegir una linea de factura en la tabla para eliminar.");
+        }
 
-        fl.setId(fli);
-        fl.setArticulos(a);
-        fl.setFacturasCab(fc);
-
-        fl.setCantidad(can);
-        fl.setPrecio(precio);
-        fl.setDtolinea(descuento);
-        fl.setIvalinea(ivaLinea);
-
-        fl = new FacturasLin(fli, a, fc, can, precio, ivaLinea, ivaLinea);
-
-        cf.deleteFacturasLin(fl);
-
-        modelLin.removeRow(i);
 
     }//GEN-LAST:event_btDeleteLinActionPerformed
 
     private void btModifyLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifyLinActionPerformed
 
+        try {
+            FacturasLin fl = new FacturasLin();
+            //Definimos el ID de la fila
+            FacturasLinId fli = new FacturasLinId();
+            Long numFac = Long.valueOf(lbNumFac.getText());
+            fli.setNumfac(numFac);
+            Long nLinea = Long.valueOf(txLineaFac.getText());
+            fli.setLineafac(nLinea);
+            
+            //Elegimos la modificacion de articulo
+            String ref = cbRef.getSelectedItem().toString();
+            Articulos a = ca.getRefArticulo(ref);
+            fl.getArticulos();
+           
+            
+            
+            FacturasCab fc = cf.getNumFacCab(numFac);
+            //Recogemos valores cantidad, precio, descuento e IVA
+            BigDecimal can = fl.getFormattedCantidad(txCantidad.getText());
+            BigDecimal precio = fl.getFormattedPrecio(txPrecio.getText());
+            BigDecimal descuento = fl.getFormattedDto(txDto.getText());
+            BigDecimal ivaLinea = fl.getFormattedIvaLinea(txIva.getText());
+
+            
+            
+            fl = new FacturasLin(fli, a, fc, can, precio, descuento, ivaLinea);
+            
+            //modificamos el stock y actualizamos tabla articulos
+            a.setStock(a.getStock().subtract(can));
+            ca.modifyArticulos(a);
+            showTableArticulos();
+            //Modificamos la linea
+            cf.modifyFacturaLin(fl);
+
+        } catch (NumberFormatException n) {
+            JOptionPane.showMessageDialog(null, "Asegúrese de seleccionar un registro en la tabla para ser modificado. "
+                    + "Tenga en cuenta que los todos los campos a rellenar son numéricos y recuerde no dejar campos vacíos .");
+        }
     }//GEN-LAST:event_btModifyLinActionPerformed
 
     private void cbDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDescripcionActionPerformed
-        String des = (String) cbDescripcion.getSelectedItem();
-        ca.getInfoArticulo(des, lbRef, txCantidad, txPrecio, txIva);
+        /*String des = (String) cbDescripcion.getSelectedItem();
+        ca.getInfoArticulo(des, lbRef, txCantidad, txPrecio, txIva);*/
+
     }//GEN-LAST:event_cbDescripcionActionPerformed
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
@@ -1991,6 +2038,20 @@ public class Main extends javax.swing.JFrame {
             fc.getNumfac(), fc.getBaseImp(), fc.getDto(), fc.getIvaTotal(), fc.getTotal()
         });
     }//GEN-LAST:event_btCalculoLineasActionPerformed
+
+    private void jTableLineaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLineaMouseClicked
+        int i = jTableLinea.getSelectedRow();
+        lbNumFac.setText(modelLin.getValueAt(i, 0).toString());
+        txLineaFac.setText(modelLin.getValueAt(i, 1).toString());
+        Articulos a = ca.getRefArticulo((modelLin.getValueAt(i, 2).toString()));
+        cbDescripcion.setSelectedItem(a.getDescripcion());
+        cbRef.setSelectedItem(a.getReferencia());
+        lbRef.setText(modelLin.getValueAt(i, 2).toString());
+        txCantidad.setText(modelLin.getValueAt(i, 3).toString());
+        txPrecio.setText(modelLin.getValueAt(i, 4).toString());
+        txDto.setText(modelLin.getValueAt(i, 5).toString());
+        txIva.setText(modelLin.getValueAt(i, 6).toString());
+    }//GEN-LAST:event_jTableLineaMouseClicked
 
     /**
      * @param args the command line arguments
