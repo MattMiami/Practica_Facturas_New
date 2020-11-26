@@ -31,47 +31,6 @@ public class FacturasLin  implements java.io.Serializable {
        this.ivalinea = ivalinea;
     }
     
-    public BigDecimal baseImpTotal(BigDecimal p, BigDecimal c){
-
-        BigDecimal base = BigDecimal.ZERO;
-        precio = p;
-        cantidad = c;
-        base = precio.multiply(cantidad);
-        return base;
-    }
-    
-    public BigDecimal dtoLinea(BigDecimal p, BigDecimal c, BigDecimal dto){
-        BigDecimal dtoTotal = BigDecimal.ZERO;
-        precio = p;
-        cantidad = c;
-        dtolinea = dto;
-        dtoTotal = (precio.multiply(cantidad)).multiply(dtolinea.multiply(BigDecimal.valueOf(0.01)));
-        return dtoTotal;
-    }
-    
-    public BigDecimal ivaLinea(BigDecimal p, BigDecimal c, BigDecimal dto, BigDecimal ivali){
-        BigDecimal ivaTotal = BigDecimal.ZERO;
-        precio = p;
-        cantidad = c;
-        dtolinea = dto;
-        ivalinea = ivali;
-        dto = (p.multiply(c)).multiply(dto.multiply(BigDecimal.valueOf(0.01)));
-        ivaTotal = ((p.multiply(c)).subtract(dto)).multiply(ivali);
-        return ivaTotal;
-    }
-    
-    public BigDecimal totalFac(BigDecimal p, BigDecimal c, BigDecimal dto, BigDecimal ivali){
-        BigDecimal importeTotal = BigDecimal.ZERO;
-        precio = p;
-        cantidad = c;
-        dtolinea = dto;
-        ivalinea = ivali;
-        dto = (p.multiply(c)).multiply(dto.multiply(BigDecimal.valueOf(0.01)));
-        BigDecimal ivaTotal = ((p.multiply(c)).subtract(dto)).multiply(ivali);
-        importeTotal = ((p.multiply(c)).subtract(dto)).add(ivaTotal);
-        return importeTotal;
-    }
-   
     public FacturasLinId getId() {
         return this.id;
     }

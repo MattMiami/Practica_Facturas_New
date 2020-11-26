@@ -8,7 +8,7 @@ package Controladores;
 import Modelos.Articulos;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.hibernate.Criteria;
@@ -48,7 +48,7 @@ public class Ctrl_Articulos {
         }
         return a;
     }
-
+    
     public boolean addArticulo(Articulos a) {
         boolean result;
         try {
@@ -114,18 +114,18 @@ public class Ctrl_Articulos {
         return articulosList;
     }
 
-    public void getInfoLinea(String descripcion, JComboBox ref, JTextField can, JTextField precio, JTextField iva) {
+    public void getInfoArticulo(String descripcion, JLabel ref, JTextField can, JTextField precio, JTextField iva) {
 
         Articulos a = new Articulos();
         try {
             operar();
             a = (Articulos) ss.get(Articulos.class, descripcion);
-            ref.setSelectedItem(a.getReferencia());
+            ref.setText(a.getReferencia());
             can.setText(a.getStock().toString());
             precio.setText(a.getPrecio().toString());
             iva.setText(a.getPorciva().toString());
         } catch (HibernateException he) {
-            JOptionPane.showInternalMessageDialog(null, "Error al cargar los tipos de pago", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showInternalMessageDialog(null, "" + he.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             ss.close();
         }

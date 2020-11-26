@@ -65,7 +65,6 @@ public class Ctrl_Facturas {
             JOptionPane.showMessageDialog(null, "Linea de factura añadida correctamente.");
         } catch (HibernateException he) {
             JOptionPane.showMessageDialog(null, "" + he.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            he.printStackTrace();
             result = false;
         } finally {
             ss.close();
@@ -140,22 +139,6 @@ public class Ctrl_Facturas {
         return f;
     }
 
-    public void fillComboNumFac(JComboBox cb) {
-        List<FacturasCab> lista = new ArrayList<FacturasCab>();
-        try {
-            operar();
-            Criteria cr = ss.createCriteria(FacturasCab.class);
-            lista = cr.list();
-            for (FacturasCab f : lista) {
-                cb.addItem(f.getNumfac());
-            }
-        } catch (HibernateException he) {
-            JOptionPane.showInternalMessageDialog(null, "Error al cargar facturas disponibles", "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            ss.close();
-        }
-    }
-
     public void fillComboDescripcion(JComboBox cb) {
         List<Articulos> lista = new ArrayList<Articulos>();
         try {
@@ -181,7 +164,6 @@ public class Ctrl_Facturas {
             lista = cr.list();
             for (Articulos a : lista) {
                 cb.addItem(a.getReferencia());
-
             }
         } catch (HibernateException he) {
             JOptionPane.showInternalMessageDialog(null, "Error al cargar los tipos de pago", "Error", JOptionPane.ERROR_MESSAGE);
