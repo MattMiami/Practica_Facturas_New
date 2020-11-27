@@ -28,7 +28,7 @@ public class Procedure {
     
     public void Procedure(String clienteUno, String clienteDos, Date fechaUno,Date fechaDos){
         try {
-            cc = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","AD_TEMA_03_FACTURAS","AD_TEMA_03_FACTURAS");
+            cc = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","AD_TEMA_03_FACTURAS","AD_TEMA_03_FACTURAS");
             CallableStatement cs = cc.prepareCall("{call SP_ESTADISTICAS (?,?,?,?)}");
             System.out.println(cs);
             System.out.println(clienteUno + "" +clienteDos + "" +fechaUno + "" +fechaDos);
@@ -36,7 +36,8 @@ public class Procedure {
             cs.setString(2, clienteUno);
             cs.setDate(3, fechaUno);
             cs.setDate(4, fechaDos);
-            cs.execute();
+            boolean result = cs.execute();
+            System.out.println(result);
             
         } catch (SQLException ex) {
            // JOptionPane.showMessageDialog(null, "Fallo al ejecutar el procedimiento almacenado", "Error", JOptionPane.ERROR_MESSAGE);
