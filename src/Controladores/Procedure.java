@@ -30,14 +30,17 @@ public class Procedure {
         try {
             cc = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","AD_TEMA_03_FACTURAS","AD_TEMA_03_FACTURAS");
             CallableStatement cs = cc.prepareCall("{call SP_ESTADISTICAS (?,?,?,?)}");
+            System.out.println(cs);
+            System.out.println(clienteUno + "" +clienteDos + "" +fechaUno + "" +fechaDos);
             cs.setString(1, clienteUno);
             cs.setString(2, clienteUno);
             cs.setDate(3, fechaUno);
             cs.setDate(4, fechaDos);
             cs.execute();
-            System.out.println(clienteUno + "" +clienteDos + "" +fechaUno + "" +fechaDos);
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Fallo al ejecutar el procedimiento almacenado", "Error", JOptionPane.ERROR_MESSAGE);
+           // JOptionPane.showMessageDialog(null, "Fallo al ejecutar el procedimiento almacenado", "Error", JOptionPane.ERROR_MESSAGE);
+           ex.printStackTrace();
         }
     }
 }

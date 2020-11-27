@@ -32,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Main extends javax.swing.JFrame {
 
-    Procedure p;
+    Procedure p =  new Procedure();
     Ctrl_Clientes cc;
     Ctrl_Articulos ca;
     Ctrl_Facturas cf;
@@ -2354,6 +2354,7 @@ public class Main extends javax.swing.JFrame {
         year2 = Integer.parseInt(txFechaDos.getText().substring(6, 10));
         date2 = new java.sql.Date(year2 - 1900, month2 - 1, day2);
 
+       
         p.Procedure(
                 cbClienteUno.getSelectedItem().toString(),
                 cbClienteDos.getSelectedItem().toString(),
