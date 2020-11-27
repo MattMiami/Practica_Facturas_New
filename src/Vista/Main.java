@@ -43,7 +43,7 @@ public class Main extends javax.swing.JFrame {
 
     /*
     Nos muestra las columnas y la informacion de la tabla Artículos
-    */
+     */
     public void showTableArticulos() {
         modelArt = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -64,7 +64,7 @@ public class Main extends javax.swing.JFrame {
 
     /*
     Nos muestra las columnas y la informacion de la tabla Clientes
-    */
+     */
     DefaultTableModel modelCli;
     String[] columnasCli = {"DNI-CIF", "Nombre"};
 
@@ -83,10 +83,10 @@ public class Main extends javax.swing.JFrame {
 
         jTableClientes.setModel(modelCli);
     }
-    
+
     /*
     Nos muestra las columnas y la informacion de la tabla Facturas
-    */
+     */
     DefaultTableModel modelFac;
     String[] columnasFac = {"NºFactura", "Fecha", "DNI-CIF"};
 
@@ -100,15 +100,16 @@ public class Main extends javax.swing.JFrame {
         modelFac.addColumn(columnasFac[1]);
         modelFac.addColumn(columnasFac[2]);
         fl = cf.facturasCabList();
+        fl.sort(FacturasCab.ordenarFactura);
         for (FacturasCab f : fl) {
             modelFac.addRow(new Object[]{f.getNumfac(), f.getFechaFormat(), f.getClientes().getDnicif()});
         }
         jTableCab.setModel(modelFac);
     }
-    
+
     /*
     Nos muestra las columnas de la tabla Linea de facturas
-    */
+     */
     DefaultTableModel modelLin;
     String[] columnasLin = {"NºFactura", "Linea factura", "Referencia", "Cantidad", "Precio", "Descuento", "IVA linea"};
 
@@ -128,10 +129,10 @@ public class Main extends javax.swing.JFrame {
 
         jTableLinea.setModel(modelLin);
     }
-    
+
     /*
     Nos muestra las columnas y la informacion de la tabla de totales
-    */
+     */
     DefaultTableModel modelTot;
     String[] columnasTot = {"NºFactura", "Base imponible", "Importe descuento", "Importe IVA", "Total factura"};
 
@@ -304,8 +305,6 @@ public class Main extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         lbNumFac = new javax.swing.JLabel();
         btCalculoLineas = new javax.swing.JButton();
-        lbRef = new javax.swing.JLabel();
-        btActualizarLineas = new javax.swing.JButton();
         menuBar4 = new javax.swing.JMenuBar();
         menuOpciones4 = new javax.swing.JMenu();
         itemCli1 = new javax.swing.JMenuItem();
@@ -1156,13 +1155,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btActualizarLineas.setText("Actualizar");
-        btActualizarLineas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btActualizarLineasActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -1171,57 +1163,45 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(btAddLin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(btDeleteLin)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel20))
+                                .addGap(34, 34, 34))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                                .addComponent(jLabel21)
+                                .addGap(79, 79, 79)))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txIva, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txDto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel17))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cbRef, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txLineaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btDeleteLin)
+                                    .addComponent(lbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btModifyLin)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btActualizarLineas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel9Layout.createSequentialGroup()
-                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel18)
-                                            .addComponent(jLabel19)
-                                            .addComponent(jLabel20))
-                                        .addGap(34, 34, 34))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                                        .addComponent(jLabel21)
-                                        .addGap(79, 79, 79)))
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txIva, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txDto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel17))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel9Layout.createSequentialGroup()
-                                        .addComponent(lbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btCalculoLineas))
-                                    .addGroup(jPanel9Layout.createSequentialGroup()
-                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                                .addComponent(cbRef, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(lbRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addComponent(cbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txLineaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(18, 18, 18)))
+                                .addComponent(btCalculoLineas, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(btAddLin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btModifyLin)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(161, 161, 161))
         );
@@ -1234,18 +1214,19 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addGap(1, 1, 1)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btAddLin)
-                                    .addComponent(btDeleteLin)
                                     .addComponent(btModifyLin)
-                                    .addComponent(btActualizarLineas))
+                                    .addComponent(btDeleteLin))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel12)))
-                            .addComponent(btCalculoLineas))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(btCalculoLineas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(12, 12, 12)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
@@ -1255,11 +1236,9 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(cbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbRef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cbRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel17)))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -1800,7 +1779,7 @@ public class Main extends javax.swing.JFrame {
             Clientes c = cc.getClientesDni(dniCif);
             List listFacCliente = new ArrayList(c.getFacturasCabs());
             if (listFacCliente != null) {
-                //orderar
+                listFacCliente.sort(FacturasCab.ordenarFactura);
                 jdFacturas.setVisible(true);
                 jdClientes.setVisible(false);
                 for (Iterator it = listFacCliente.iterator(); it.hasNext();) {
@@ -1839,6 +1818,7 @@ public class Main extends javax.swing.JFrame {
             lbNumFac.setText(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
             List listaLineaFactura = new ArrayList(fc.getFacturasLins());
             if (listaLineaFactura != null) {
+                listaLineaFactura.sort(FacturasLin.ordenarLineas);
                 for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
                     FacturasLin fl = (FacturasLin) it.next();
                     modelLin.addRow(new Object[]{
@@ -1861,6 +1841,7 @@ public class Main extends javax.swing.JFrame {
             lbNumFac.setText(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
             List listaLineaFactura = new ArrayList(fc.getFacturasLins());
             if (listaLineaFactura != null) {
+                listaLineaFactura.sort(FacturasLin.ordenarLineas);
                 for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
 
                     FacturasLin fl = (FacturasLin) it.next();
@@ -2024,6 +2005,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btModifyFacActionPerformed
 
     private void btAddLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddLinActionPerformed
+        /*
+        Debemos haber seleccionado una factura en la vantana de facturas para seguidamente añadir una linea
+        obteniendo los valores de los campos de inserción de informacion de lineas de facturas.
+         */
         try {
             FacturasLin fl = new FacturasLin();
             Long nl = Long.valueOf(txLineaFac.getText());
@@ -2037,9 +2022,16 @@ public class Main extends javax.swing.JFrame {
             BigDecimal ivalinea = fl.getFormattedIvaLinea(txIva.getText());
 
             fl = new FacturasLin(fli, a, fc, can, precio, dto, ivalinea);
-            cf.addFacturasLin(fl);
-            //modelLin.setRowCount(0);
-            modelLin.addRow(new Object[]{
+            /*
+            Si añadimos correctamente, modificamos el stock y actualizamos la tabla.
+            */
+            if(cf.addFacturasLin(fl)){
+                fl.getArticulos();
+                a.setStock(a.getStock().subtract(can));
+                ca.modifyArticulos(a);
+                showTableArticulos();
+               
+                modelLin.addRow(new Object[]{
                 fl.getId().getNumfac(),
                 fl.getId().getLineafac(),
                 fl.getArticulos().getReferencia(),
@@ -2048,6 +2040,9 @@ public class Main extends javax.swing.JFrame {
                 fl.getDtolinea(),
                 fl.getIvalinea()
             });
+            }
+            
+            
 
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacios, además asegúrese de que todos los datos introducidos son numéricos.");
@@ -2061,8 +2056,8 @@ public class Main extends javax.swing.JFrame {
         try {
             /*
             Recogemos los valores de una fila seleccionada para eliminar ese objeto linea
-            */
-                   
+             */
+
             int i = jTableLinea.getSelectedRow();
             FacturasLin fl = new FacturasLin();
             Long numFac = (Long) modelLin.getValueAt(i, 0);
@@ -2088,8 +2083,17 @@ public class Main extends javax.swing.JFrame {
 
             fl = new FacturasLin(fli, a, fc, can, precio, descuento, ivaLinea);
 
-            cf.deleteFacturasLin(fl);
-            modelLin.removeRow(i);
+            /*
+            Moficicamos el stock si la operación eliminar tiene éxito.
+            */
+            if (cf.deleteFacturasLin(fl)) {
+                fl.getArticulos();
+                a.setStock(a.getStock().add(can));
+                ca.modifyArticulos(a);
+                showTableArticulos();
+                modelLin.removeRow(i);
+            }
+            
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Asegúrese de elegir una linea de factura en la tabla para eliminar.");
         }
@@ -2099,11 +2103,16 @@ public class Main extends javax.swing.JFrame {
 
     private void btModifyLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifyLinActionPerformed
 
+        /*
+        Para modificar una linea de factura debemos haber seleccionado una linea en la vantana de facturas,
+        tras acceder a la pantalla de lineas de factura eligiremos un registro en la tabla para obtener los 
+        valores a modificar de los campos de insercion de información.
+         */
         try {
 
             FacturasLin fl = new FacturasLin();
 
-            //Definimos el ID de la fila
+            //Obtenemos el ID de la fila
             FacturasLinId fli = new FacturasLinId();
             Long numFac = Long.valueOf(lbNumFac.getText());
             fli.setNumfac(numFac);
@@ -2124,12 +2133,56 @@ public class Main extends javax.swing.JFrame {
 
             fl = new FacturasLin(fli, a, fc, can, precio, descuento, ivaLinea);
 
-            //modificamos el stock y actualizamos tabla articulos
-            a.setStock(a.getStock().subtract(can));
-            ca.modifyArticulos(a);
-            showTableArticulos();
-            //Modificamos la linea
-            cf.modifyFacturaLin(fl);
+            /*
+            Debemos haber seleccionado correctamente un registro para que el stock sea modificado automaticamente.
+             */
+            try {
+                int i = jTableLinea.getSelectedRow();
+                Long l = Long.parseLong(jTableLinea.getValueAt(i, 3).toString());
+                BigDecimal cantidadActual = BigDecimal.valueOf(l);
+                /*
+                Modificamos la linea
+                 */
+                if (cf.modifyFacturaLin(fl)) {
+                    /*
+                    Actualizamos la tabla Lineas de facturas
+                     */
+                    try {
+                        modelLin.setRowCount(0);
+                        FacturasCab fcActualizar = cf.getNumFacCab(Long.parseLong(lbNumFac.getText()));
+                        List listaLineaFactura = new ArrayList(fcActualizar.getFacturasLins());
+                        listaLineaFactura.sort(FacturasLin.ordenarLineas);
+                        for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
+                            FacturasLin factLin = (FacturasLin) it.next();
+
+                            modelLin.addRow(new Object[]{
+                                factLin.getFacturasCab().getNumfac(),
+                                factLin.getId().getLineafac(),
+                                factLin.getArticulos().getReferencia(),
+                                factLin.getCantidad().toString(),
+                                factLin.getPrecio().toString(),
+                                factLin.getDtolinea().toString(),
+                                factLin.getIvalinea()});
+                        }
+                    } catch (NumberFormatException n) {
+                    }
+                }
+                /*modificamos el stock del artículo, si añadimos más unidades 
+                restará a la cantidad total del stock, si por el contrario quitamos
+                unidades de la linea de factura sumará esas cantidades al stock.
+                 */
+                if (cantidadActual.compareTo(can) < 0) {
+                    a.setStock(a.getStock().subtract(can));
+                    ca.modifyArticulos(a);
+                    showTableArticulos();
+                } else {
+                    a.setStock(a.getStock().add(cantidadActual).subtract(can));
+                    ca.modifyArticulos(a);
+                    showTableArticulos();
+                }
+            } catch (ArrayIndexOutOfBoundsException ax) {
+                JOptionPane.showMessageDialog(null, "Porfavor seleccione la línea de factura para que el stock sea modificado correctamente.");
+            }
 
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "Asegúrese de seleccionar un registro en la tabla para ser modificado. "
@@ -2192,41 +2245,15 @@ public class Main extends javax.swing.JFrame {
         Articulos a = ca.getRefArticulo((modelLin.getValueAt(i, 2).toString()));
         cbDescripcion.setSelectedItem(a.getDescripcion());
         cbRef.setSelectedItem(a.getReferencia());
-        lbRef.setText(modelLin.getValueAt(i, 2).toString());
         txCantidad.setText(modelLin.getValueAt(i, 3).toString());
         txPrecio.setText(modelLin.getValueAt(i, 4).toString());
         txDto.setText(modelLin.getValueAt(i, 5).toString());
         txIva.setText(modelLin.getValueAt(i, 6).toString());
     }//GEN-LAST:event_jTableLineaMouseClicked
 
-    private void btActualizarLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarLineasActionPerformed
-        /*
-        Nos actualiza la tabla de Linea de facturas, para ver las modificaciones
-        */
-        try {
-            modelLin.setRowCount(0);
-            FacturasCab fc = cf.getNumFacCab(Long.parseLong(lbNumFac.getText()));
-            List listaLineaFactura = new ArrayList(fc.getFacturasLins());
-            for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
-                FacturasLin factLin = (FacturasLin) it.next();
-
-                modelLin.addRow(new Object[]{
-                    factLin.getFacturasCab().getNumfac(),
-                    factLin.getId().getLineafac(),
-                    factLin.getArticulos().getReferencia(),
-                    factLin.getCantidad().toString(),
-                    factLin.getPrecio().toString(),
-                    factLin.getDtolinea().toString(),
-                    factLin.getIvalinea()});
-            }
-        } catch (NumberFormatException n) {
-        }
-
-    }//GEN-LAST:event_btActualizarLineasActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jdEstadisticas.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -2271,7 +2298,6 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btActualizarArt;
     private javax.swing.JButton btActualizarCli;
-    private javax.swing.JButton btActualizarLineas;
     private javax.swing.JButton btAddArt;
     private javax.swing.JButton btAddCli;
     private javax.swing.JButton btAddFac;
@@ -2379,7 +2405,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog jdFacturas;
     private javax.swing.JDialog jdLineaFactura;
     private javax.swing.JLabel lbNumFac;
-    private javax.swing.JLabel lbRef;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuBar menuBar1;
     private javax.swing.JMenuBar menuBar2;

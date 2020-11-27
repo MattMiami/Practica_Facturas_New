@@ -4,6 +4,7 @@ package Modelos;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -135,5 +136,17 @@ public class FacturasCab implements java.io.Serializable {
     public void setFacturasLins(Set facturasLins) {
         this.facturasLins = facturasLins;
     }
+    
+    public static Comparator<FacturasCab> ordenarFactura = new Comparator<FacturasCab>() {
+
+        @Override
+        public int compare(FacturasCab o1, FacturasCab o2) {
+            long numFac1 = o1.getNumfac();
+            long numFac2 = o2.getNumfac();
+
+            return (int) numFac1 - (int) numFac2;
+        }
+
+    };
 
 }

@@ -3,6 +3,7 @@ package Modelos;
 
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -97,10 +98,6 @@ public class Articulos  implements java.io.Serializable {
     public void setFacturasLins(Set facturasLins) {
         this.facturasLins = facturasLins;
     }
-
-
-    
-
 
 }
 

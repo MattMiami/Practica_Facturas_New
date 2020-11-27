@@ -65,7 +65,7 @@ public class Ctrl_Facturas {
             result = true;
             JOptionPane.showMessageDialog(null, "Linea de factura añadida correctamente.");
         } catch (HibernateException he) {
-            JOptionPane.showMessageDialog(null, "" + he.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La línea de factura ya existe, porfavor pruebe otra.", "Error", JOptionPane.ERROR_MESSAGE);
             result = false;
         } finally {
             ss.close();
@@ -85,16 +85,21 @@ public class Ctrl_Facturas {
         }
     }
 
-    public void deleteFacturasLin(FacturasLin fl) {
+    public boolean deleteFacturasLin(FacturasLin fl) {
+        boolean result;
         try {
             operar();
             ss.delete(fl);
             ss.getTransaction().commit();
+            result = true;
+            JOptionPane.showMessageDialog(null, "Linea de factura eliminada correctamente");
         } catch (HibernateException he) {
-            JOptionPane.showMessageDialog(null, "" + he.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            result = false;
+            JOptionPane.showMessageDialog(null, "Error al eliminar linea de factura" , "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             ss.close();
         }
+        return result;
     }
 
     public boolean modifyFactura(FacturasCab f) {
@@ -104,6 +109,7 @@ public class Ctrl_Facturas {
             ss.saveOrUpdate(f);
             ss.getTransaction().commit();
             result = true;
+            JOptionPane.showMessageDialog(null, "Factura modificada correctamente");
         } catch (HibernateException he) {
             JOptionPane.showMessageDialog(null, "Debes modificar una factura existente.", "Error", JOptionPane.ERROR_MESSAGE);
             result = false;
