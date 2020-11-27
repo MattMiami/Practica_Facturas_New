@@ -6,6 +6,7 @@
 package Controladores;
 
 import Modelos.Clientes;
+import Modelos.EstadisticasClientes;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -128,5 +129,19 @@ public class Ctrl_Clientes {
         } finally {
             ss.close();
         }
+    }
+    
+    public List estadisticasList() {
+        List<EstadisticasClientes> estadisticasList = new ArrayList<EstadisticasClientes>();
+        try {
+            operar();
+            Criteria c = ss.createCriteria(EstadisticasClientes.class);
+            estadisticasList = c.list();
+        } catch (HibernateException he) {
+            JOptionPane.showMessageDialog(null, "" + he.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            ss.close();
+        }
+        return estadisticasList;
     }
 }

@@ -9,8 +9,10 @@ import Controladores.Ctrl_Articulos;
 import Controladores.Ctrl_Clientes;
 import Controladores.Ctrl_Entrada;
 import Controladores.Ctrl_Facturas;
+import Controladores.Procedure;
 import Modelos.Articulos;
 import Modelos.Clientes;
+import Modelos.EstadisticasClientes;
 import Modelos.FacturasCab;
 import Modelos.FacturasLin;
 import Modelos.FacturasLinId;
@@ -30,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Main extends javax.swing.JFrame {
 
+    Procedure p;
     Ctrl_Clientes cc;
     Ctrl_Articulos ca;
     Ctrl_Facturas cf;
@@ -37,6 +40,16 @@ public class Main extends javax.swing.JFrame {
     private List<Clientes> cl = new ArrayList<Clientes>();
     private List<Articulos> al = new ArrayList<Articulos>();
     private List<FacturasCab> fl = new ArrayList<FacturasCab>();
+    private List<EstadisticasClientes> el = new ArrayList<EstadisticasClientes>();
+    
+    Integer day1;
+    Integer day2;
+    Integer month1;
+    Integer month2;
+    Integer year1;
+    Integer year2;
+    java.sql.Date date1;
+    java.sql.Date date2;
 
     DefaultTableModel modelArt;
     String[] columnasArt = {"Referencia", "Descripción", "Precio", "IVA", "Cantidad Stock"};
@@ -150,9 +163,9 @@ public class Main extends javax.swing.JFrame {
 
         jTableTotales.setModel(modelTot);
     }
-    
+
     DefaultTableModel modelEstadisticas;
-    String[] columnasEst = {"Año", "Número Mes", "Nombre Mes", "DNI-CIF", "NOMBRE CLIENTE","SUMA BASE", "SUMA DTO", "SUMA IVA", "SUMA TOTALES"};
+    String[] columnasEst = {"Año", "Número Mes", "Nombre Mes", "DNI-CIF", "NOMBRE CLIENTE", "SUMA BASE", "SUMA DTO", "SUMA IVA", "SUMA TOTALES"};
 
     public void showTableEstadisticas() {
         modelEstadisticas = new DefaultTableModel() {
@@ -178,6 +191,7 @@ public class Main extends javax.swing.JFrame {
         cc = new Ctrl_Clientes();
         ca = new Ctrl_Articulos();
         cf = new Ctrl_Facturas();
+
         jdArticulos.pack();
         jdArticulos.setLocationRelativeTo(null);
         jdArticulos.setResizable(false);
@@ -352,6 +366,7 @@ public class Main extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        btMostrarEstadisticas = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
@@ -1249,10 +1264,11 @@ public class Main extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btAddLin)
-                                    .addComponent(btModifyLin)
-                                    .addComponent(btDeleteLin))
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btModifyLin, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btAddLin)
+                                        .addComponent(btDeleteLin)))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1386,6 +1402,13 @@ public class Main extends javax.swing.JFrame {
 
         jLabel24.setText("Fecha");
 
+        btMostrarEstadisticas.setText("Mostrar estadísticas");
+        btMostrarEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMostrarEstadisticasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -1398,13 +1421,14 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel23)
                     .addComponent(jLabel15))
                 .addGap(33, 33, 33)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbClienteUno, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txFechaUno, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbClienteDos, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txFechaDos, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbClienteUno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txFechaUno)
+                    .addComponent(cbClienteDos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txFechaDos)
+                    .addComponent(btMostrarEstadisticas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -1427,10 +1451,12 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txFechaDos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24))
+                .addGap(18, 18, 18)
+                .addComponent(btMostrarEstadisticas)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jdEstadisticasLayout = new javax.swing.GroupLayout(jdEstadisticas.getContentPane());
@@ -2087,25 +2113,23 @@ public class Main extends javax.swing.JFrame {
             fl = new FacturasLin(fli, a, fc, can, precio, dto, ivalinea);
             /*
             Si añadimos correctamente, modificamos el stock y actualizamos la tabla.
-            */
-            if(cf.addFacturasLin(fl)){
+             */
+            if (cf.addFacturasLin(fl)) {
                 fl.getArticulos();
                 a.setStock(a.getStock().subtract(can));
                 ca.modifyArticulos(a);
                 showTableArticulos();
-               
+
                 modelLin.addRow(new Object[]{
-                fl.getId().getNumfac(),
-                fl.getId().getLineafac(),
-                fl.getArticulos().getReferencia(),
-                fl.getCantidad(),
-                fl.getPrecio(),
-                fl.getDtolinea(),
-                fl.getIvalinea()
-            });
+                    fl.getId().getNumfac(),
+                    fl.getId().getLineafac(),
+                    fl.getArticulos().getReferencia(),
+                    fl.getCantidad(),
+                    fl.getPrecio(),
+                    fl.getDtolinea(),
+                    fl.getIvalinea()
+                });
             }
-            
-            
 
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacios, además asegúrese de que todos los datos introducidos son numéricos.");
@@ -2148,7 +2172,7 @@ public class Main extends javax.swing.JFrame {
 
             /*
             Moficicamos el stock si la operación eliminar tiene éxito.
-            */
+             */
             if (cf.deleteFacturasLin(fl)) {
                 fl.getArticulos();
                 a.setStock(a.getStock().add(can));
@@ -2156,7 +2180,7 @@ public class Main extends javax.swing.JFrame {
                 showTableArticulos();
                 modelLin.removeRow(i);
             }
-            
+
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Asegúrese de elegir una linea de factura en la tabla para eliminar.");
         }
@@ -2319,6 +2343,38 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btMostrarEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMostrarEstadisticasActionPerformed
+        day1 = Integer.parseInt(txFechaUno.getText().substring(0, 2));
+        month1 = Integer.parseInt(txFechaUno.getText().substring(3, 5));
+        year1 = Integer.parseInt(txFechaUno.getText().substring(6, 10));
+        date1 = new java.sql.Date(year1 - 1900, month1 - 1, day1);
+
+        day2 = Integer.parseInt(txFechaDos.getText().substring(0, 2));
+        month2 = Integer.parseInt(txFechaDos.getText().substring(3, 5));
+        year2 = Integer.parseInt(txFechaDos.getText().substring(6, 10));
+        date2 = new java.sql.Date(year2 - 1900, month2 - 1, day2);
+
+        p.Procedure(
+                cbClienteUno.getSelectedItem().toString(),
+                cbClienteDos.getSelectedItem().toString(),
+                date1,
+                date2);
+        
+        el = cc.estadisticasList();
+        for (EstadisticasClientes e : el) {
+            modelEstadisticas.addRow(new Object[]{
+                e.getId().getAnio(),
+                e.getId().getMesNum(),
+                e.getMesNom(),
+                e.getId().getDnicif(),
+                e.getNombrecli(),
+                e.getSumaBase(),
+                e.getSumaDtos(),
+                e.getSumaIva(),
+                e.getSumaTotales()});
+        }
+    }//GEN-LAST:event_btMostrarEstadisticasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2383,6 +2439,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btModCli;
     private javax.swing.JButton btModifyFac;
     private javax.swing.JButton btModifyLin;
+    private javax.swing.JButton btMostrarEstadisticas;
     private javax.swing.JComboBox<String> cbClienteDos;
     private javax.swing.JComboBox<String> cbClienteUno;
     private javax.swing.JComboBox<String> cbClientesDisponibles;
