@@ -9,6 +9,8 @@ import Controladores.Ctrl_Articulos;
 import Controladores.Ctrl_Clientes;
 import Controladores.Ctrl_Entrada;
 import Controladores.Ctrl_Facturas;
+import Controladores.ExportarXml;
+import Controladores.NewHibernateUtil;
 import Controladores.Procedure;
 import Modelos.Articulos;
 import Modelos.Clientes;
@@ -17,14 +19,36 @@ import Modelos.FacturasCab;
 import Modelos.FacturasLin;
 import Modelos.FacturasLinId;
 import Modelos.FacturasTot;
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -32,7 +56,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Main extends javax.swing.JFrame {
 
-    Procedure p =  new Procedure();
+    Procedure p = new Procedure();
     Ctrl_Clientes cc;
     Ctrl_Articulos ca;
     Ctrl_Facturas cf;
@@ -41,7 +65,7 @@ public class Main extends javax.swing.JFrame {
     private List<Articulos> al = new ArrayList<Articulos>();
     private List<FacturasCab> fl = new ArrayList<FacturasCab>();
     private List<EstadisticasClientes> el = new ArrayList<EstadisticasClientes>();
-    
+
     Integer day1;
     Integer day2;
     Integer month1;
@@ -209,7 +233,7 @@ public class Main extends javax.swing.JFrame {
         jdLineaFactura.setResizable(false);
         jdLineaFactura.setTitle("Gestión de lineas de facturas");
         jdEstadisticas.setResizable(false);
-        jdEstadisticas.setLocationRelativeTo(null);
+        jdEstadisticas.setLocationRelativeTo(jdClientes);
         jdEstadisticas.pack();
         jdEstadisticas.setTitle("Estadíticas de ventas");
 
@@ -246,7 +270,7 @@ public class Main extends javax.swing.JFrame {
         txDniCli = new javax.swing.JTextField();
         txNombre = new javax.swing.JTextField();
         btFacAsociadas = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btEstadisticas = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         txBucarCli = new javax.swing.JTextField();
         btBuscarCli = new javax.swing.JButton();
@@ -426,10 +450,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Estadísticas clientes");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btEstadisticas.setText("Estadísticas clientes");
+        btEstadisticas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btEstadisticasActionPerformed(evt);
             }
         });
 
@@ -440,7 +464,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 34, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEstadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btFacAsociadas))
                 .addGap(29, 29, 29))
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -471,7 +495,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(btFacAsociadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btEstadisticas)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -933,11 +957,8 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(txFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btDetalles))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel10))
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
@@ -1024,6 +1045,11 @@ public class Main extends javax.swing.JFrame {
         btImportar.setText("Importar factura");
 
         btExportar.setText("Exportar factura");
+        btExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExportarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -2338,12 +2364,13 @@ public class Main extends javax.swing.JFrame {
         txIva.setText(modelLin.getValueAt(i, 6).toString());
     }//GEN-LAST:event_jTableLineaMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEstadisticasActionPerformed
         jdEstadisticas.setVisible(true);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btEstadisticasActionPerformed
 
     private void btMostrarEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMostrarEstadisticasActionPerformed
+
         day1 = Integer.parseInt(txFechaUno.getText().substring(0, 2));
         month1 = Integer.parseInt(txFechaUno.getText().substring(3, 5));
         year1 = Integer.parseInt(txFechaUno.getText().substring(6, 10));
@@ -2354,13 +2381,12 @@ public class Main extends javax.swing.JFrame {
         year2 = Integer.parseInt(txFechaDos.getText().substring(6, 10));
         date2 = new java.sql.Date(year2 - 1900, month2 - 1, day2);
 
-       
         p.Procedure(
                 cbClienteUno.getSelectedItem().toString(),
                 cbClienteDos.getSelectedItem().toString(),
                 date1,
                 date2);
-        
+
         el = cc.estadisticasList();
         for (EstadisticasClientes e : el) {
             modelEstadisticas.addRow(new Object[]{
@@ -2375,6 +2401,24 @@ public class Main extends javax.swing.JFrame {
                 e.getSumaTotales()});
         }
     }//GEN-LAST:event_btMostrarEstadisticasActionPerformed
+
+    private void btExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExportarActionPerformed
+        int i = jTableCab.getSelectedRow();
+        Long numFac = Long.parseLong(jTableCab.getValueAt(i, 0).toString());
+        FacturasCab fc = cf.getNumFacCab(numFac);
+
+        try {
+            ExportarXml xml = new ExportarXml();
+            xml.generarDocumento(fc);
+            xml.crearXml();
+
+        } catch (ParserConfigurationException ex) {
+            ex.getMessage();
+        } catch (TransformerException ex) {
+            ex.getMessage();
+        }
+
+    }//GEN-LAST:event_btExportarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2433,6 +2477,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btDeleteFac;
     private javax.swing.JButton btDeleteLin;
     private javax.swing.JButton btDetalles;
+    private javax.swing.JButton btEstadisticas;
     private javax.swing.JButton btExportar;
     private javax.swing.JButton btFacAsociadas;
     private javax.swing.JButton btImportar;
@@ -2462,7 +2507,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemStock1;
     private javax.swing.JMenuItem itemStock2;
     private javax.swing.JMenuItem itemStock3;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

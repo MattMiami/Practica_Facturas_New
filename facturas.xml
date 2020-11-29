@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Facturas>
+<Factura>
+<cabecera>
+<numFactura>1001</numFactura>
+<dniCif>C02</dniCif>
+<nombre>CLIENTE DOS</nombre>
+<fecha>2020-11-18</fecha>
+</cabecera>
+<lineasFactura>
+<nFac>1001</nFac>
+<numeroLinea/>
+<referencia/>
+<cantidad/>
+<precio/>
+<dto/>
+<iva/>
+</lineasFactura>
+<totalesFacturas>
+<numFactura>1001</numFactura>
+<baseImp>670</baseImp>
+<impDot>60.0</impDot>
+<impIva>109.900</impIva>
+<totalFac>779.900</totalFac>
+</totalesFacturas>
+</Factura>
+</Facturas>

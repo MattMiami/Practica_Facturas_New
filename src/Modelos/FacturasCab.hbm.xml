@@ -8,7 +8,7 @@
             <column name="NUMFAC" precision="10" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="clientes" class="Modelos.Clientes" fetch="select">
+        <many-to-one name="clientes" class="Modelos.Clientes" fetch="join">
             <column name="DNICIF" length="13" not-null="true" />
         </many-to-one>
         <property name="fechafac" type="date">
