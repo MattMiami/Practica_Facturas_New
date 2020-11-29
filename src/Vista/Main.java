@@ -28,7 +28,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -55,7 +57,7 @@ import org.w3c.dom.Element;
  * @author Antonio Mateos
  */
 public class Main extends javax.swing.JFrame {
-    
+
     Procedure p = new Procedure();
     Ctrl_Clientes cc;
     Ctrl_Articulos ca;
@@ -65,7 +67,7 @@ public class Main extends javax.swing.JFrame {
     private List<Articulos> al = new ArrayList<Articulos>();
     private List<FacturasCab> fl = new ArrayList<FacturasCab>();
     private List<EstadisticasClientes> el = new ArrayList<EstadisticasClientes>();
-    
+
     Integer day1;
     Integer day2;
     Integer month1;
@@ -74,7 +76,7 @@ public class Main extends javax.swing.JFrame {
     Integer year2;
     java.sql.Date date1;
     java.sql.Date date2;
-    
+
     DefaultTableModel modelArt;
     String[] columnasArt = {"Referencia", "Descripción", "Precio", "IVA", "Cantidad Stock"};
 
@@ -104,7 +106,7 @@ public class Main extends javax.swing.JFrame {
      */
     DefaultTableModel modelCli;
     String[] columnasCli = {"DNI-CIF", "Nombre"};
-    
+
     public void showTableClientes() {
         modelCli = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -117,7 +119,7 @@ public class Main extends javax.swing.JFrame {
         for (Clientes c : cl) {
             modelCli.addRow(new Object[]{c.getDnicif(), c.getNombrecli()});
         }
-        
+
         jTableClientes.setModel(modelCli);
     }
 
@@ -126,7 +128,7 @@ public class Main extends javax.swing.JFrame {
      */
     DefaultTableModel modelFac;
     String[] columnasFac = {"NºFactura", "Fecha", "DNI-CIF"};
-    
+
     public void showTableFacturas() {
         modelFac = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -149,7 +151,7 @@ public class Main extends javax.swing.JFrame {
      */
     DefaultTableModel modelLin;
     String[] columnasLin = {"NºFactura", "Linea factura", "Referencia", "Cantidad", "Precio", "Descuento", "IVA linea"};
-    
+
     public void showTableFacturasLin() {
         modelLin = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -163,7 +165,7 @@ public class Main extends javax.swing.JFrame {
         modelLin.addColumn(columnasLin[4]);
         modelLin.addColumn(columnasLin[5]);
         modelLin.addColumn(columnasLin[6]);
-        
+
         jTableLinea.setModel(modelLin);
     }
 
@@ -172,7 +174,7 @@ public class Main extends javax.swing.JFrame {
      */
     DefaultTableModel modelTot;
     String[] columnasTot = {"NºFactura", "Base imponible", "Importe descuento", "Importe IVA", "Total factura"};
-    
+
     public void showTableFacturasTot() {
         modelTot = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -184,13 +186,13 @@ public class Main extends javax.swing.JFrame {
         modelTot.addColumn(columnasTot[2]);
         modelTot.addColumn(columnasTot[3]);
         modelTot.addColumn(columnasTot[4]);
-        
+
         jTableTotales.setModel(modelTot);
     }
-    
+
     DefaultTableModel modelEstadisticas;
     String[] columnasEst = {"Año", "Número Mes", "Nombre Mes", "DNI-CIF", "NOMBRE CLIENTE", "SUMA BASE", "SUMA DTO", "SUMA IVA", "SUMA TOTALES"};
-    
+
     public void showTableEstadisticas() {
         modelEstadisticas = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -206,16 +208,16 @@ public class Main extends javax.swing.JFrame {
         modelEstadisticas.addColumn(columnasEst[6]);
         modelEstadisticas.addColumn(columnasEst[7]);
         modelEstadisticas.addColumn(columnasEst[8]);
-        
+
         jTableEstadisticas.setModel(modelEstadisticas);
     }
-    
+
     public Main() {
         initComponents();
         cc = new Ctrl_Clientes();
         ca = new Ctrl_Articulos();
         cf = new Ctrl_Facturas();
-        
+
         jdArticulos.pack();
         jdArticulos.setLocationRelativeTo(null);
         jdArticulos.setResizable(false);
@@ -236,7 +238,7 @@ public class Main extends javax.swing.JFrame {
         jdEstadisticas.setLocationRelativeTo(jdClientes);
         jdEstadisticas.pack();
         jdEstadisticas.setTitle("Estadíticas de ventas");
-        
+
         showTableClientes();
         showTableArticulos();
         showTableFacturas();
@@ -248,7 +250,7 @@ public class Main extends javax.swing.JFrame {
         cc.fillComboBox(cbClienteDos);
         cf.fillComboDescripcion(cbDescripcion);
         cf.fillComboRef(cbRef);
-        
+
     }
 
     /**
@@ -1043,6 +1045,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         btImportar.setText("Importar factura");
+        btImportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btImportarActionPerformed(evt);
+            }
+        });
 
         btExportar.setText("Exportar factura");
         btExportar.addActionListener(new java.awt.event.ActionListener() {
@@ -1221,6 +1228,11 @@ public class Main extends javax.swing.JFrame {
 
         cbRef.setMaximumRowCount(20);
         cbRef.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        cbRef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRefActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Descripcion");
 
@@ -1262,10 +1274,9 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel17))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cbRef, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txLineaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbRef, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txLineaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(btDeleteLin)
@@ -1699,7 +1710,7 @@ public class Main extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacíos o añadir un cliente que ya exista.");
         }
-        
+
 
     }//GEN-LAST:event_btAddCliActionPerformed
 
@@ -1722,12 +1733,12 @@ public class Main extends javax.swing.JFrame {
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Asegúrate de haber seleccionado un cliente en la tabla para eliminar.");
         }
-        
+
 
     }//GEN-LAST:event_btDeleteCliActionPerformed
 
     private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClientesMouseClicked
-        
+
         btFacAsociadas.setEnabled(true);
         btDeleteCli.setEnabled(true);
         btModCli.setEnabled(true);
@@ -1781,7 +1792,7 @@ public class Main extends javax.swing.JFrame {
             a.setPorciva(bd2);
             BigDecimal bd3 = a.getFormattedStock(txStockDisponible.getText());
             a.setStock(bd3);
-            
+
             if (ca.addArticulo(a)) {
                 if (!txRefArticulo.getText().isEmpty() || !txDescripcion.getText().isEmpty() || !txPrecioArticulo.getText().isEmpty() || !txIvaArt.getText().isEmpty() || !txStockDisponible.getText().isEmpty()) {
                     modelArt.setRowCount(0);
@@ -1802,9 +1813,9 @@ public class Main extends javax.swing.JFrame {
             }
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacíos, además asegúrate de insertar correctamente los datos. Ejemplo: el campo cantidad o IVA deben ser numéricos.");
-            
+
         }
-        
+
 
     }//GEN-LAST:event_btAddArtActionPerformed
 
@@ -1879,7 +1890,7 @@ public class Main extends javax.swing.JFrame {
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacíos, además asegúrate de insertar correctamente los datos. Ejemplo: el campo cantidad o IVA deben ser numéricos.");
         }
-        
+
 
     }//GEN-LAST:event_btModArtActionPerformed
 
@@ -1958,7 +1969,7 @@ public class Main extends javax.swing.JFrame {
             if (listaLineaFactura != null) {
                 listaLineaFactura.sort(FacturasLin.ordenarLineas);
                 for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
-                    
+
                     FacturasLin fl = (FacturasLin) it.next();
                     modelLin.addRow(new Object[]{
                         fl.getFacturasCab().getNumfac(),
@@ -1969,15 +1980,15 @@ public class Main extends javax.swing.JFrame {
                         fl.getDtolinea().toString(),
                         fl.getIvalinea()});
                 }
-                
+
             }
         }
-        
+
 
     }//GEN-LAST:event_jTableCabMouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        
+
         showTableFacturas();
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1985,7 +1996,7 @@ public class Main extends javax.swing.JFrame {
         /*
         Obtenemos los valores de los campos para añadir una nueva factura
          */
-        
+
         try {
             Clientes c = cc.getClientesDni((String) cbClientesDisponibles.getSelectedItem());
             FacturasCab f = new FacturasCab(Long.parseLong(txNumFacCab.getText()), c);
@@ -2008,11 +2019,11 @@ public class Main extends javax.swing.JFrame {
                     }
                 }
             }
-            
+
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "Campos vacios");
         }
-        
+
 
     }//GEN-LAST:event_btAddFacActionPerformed
 
@@ -2076,7 +2087,7 @@ public class Main extends javax.swing.JFrame {
             Long numFac = (Long) modelFac.getValueAt(i, 0);
             String fecha = (String) modelFac.getValueAt(i, 1);
             String dni = (String) modelFac.getValueAt(i, 2);
-            
+
             fc.setNumfac(numFac);
             fc.setFechafac(fc.getFormattedDate(fecha));
             fc.setClientes(cc.getClientesDni(dni));
@@ -2115,7 +2126,7 @@ public class Main extends javax.swing.JFrame {
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "Campos vacíos.");
         }
-        
+
 
     }//GEN-LAST:event_btModifyFacActionPerformed
 
@@ -2135,7 +2146,7 @@ public class Main extends javax.swing.JFrame {
             BigDecimal precio = fl.getFormattedPrecio(txPrecio.getText());
             BigDecimal dto = fl.getFormattedDto(txDto.getText());
             BigDecimal ivalinea = fl.getFormattedIvaLinea(txIva.getText());
-            
+
             fl = new FacturasLin(fli, a, fc, can, precio, dto, ivalinea);
             /*
             Si añadimos correctamente, modificamos el stock y actualizamos la tabla.
@@ -2145,7 +2156,7 @@ public class Main extends javax.swing.JFrame {
                 a.setStock(a.getStock().subtract(can));
                 ca.modifyArticulos(a);
                 showTableArticulos();
-                
+
                 modelLin.addRow(new Object[]{
                     fl.getId().getNumfac(),
                     fl.getId().getLineafac(),
@@ -2156,12 +2167,12 @@ public class Main extends javax.swing.JFrame {
                     fl.getIvalinea()
                 });
             }
-            
+
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacios, además asegúrese de que todos los datos introducidos son numéricos.");
-            
+
         }
-        
+
 
     }//GEN-LAST:event_btAddLinActionPerformed
 
@@ -2170,7 +2181,7 @@ public class Main extends javax.swing.JFrame {
             /*
             Recogemos los valores de una fila seleccionada para eliminar ese objeto linea
              */
-            
+
             int i = jTableLinea.getSelectedRow();
             FacturasLin fl = new FacturasLin();
             Long numFac = (Long) modelLin.getValueAt(i, 0);
@@ -2178,14 +2189,14 @@ public class Main extends javax.swing.JFrame {
             FacturasLinId fli = new FacturasLinId(numFac, nLinea);
             FacturasCab fc = cf.getNumFacCab(numFac);
             String ref = (String) modelLin.getValueAt(i, 2);
-            
+
             Articulos a = ca.getRefArticulo(ref);
-            
+
             BigDecimal can = fl.getFormattedCantidad(modelLin.getValueAt(i, 3).toString());
             BigDecimal precio = fl.getFormattedPrecio(modelLin.getValueAt(i, 4).toString());
             BigDecimal descuento = fl.getFormattedDto(modelLin.getValueAt(i, 5).toString());
             BigDecimal ivaLinea = fl.getFormattedIvaLinea(modelLin.getValueAt(i, 6).toString());
-            
+
             fl.setId(fli);
             fl.setArticulos(a);
             fl.setFacturasCab(fc);
@@ -2193,7 +2204,7 @@ public class Main extends javax.swing.JFrame {
             fl.setPrecio(precio);
             fl.setDtolinea(descuento);
             fl.setIvalinea(ivaLinea);
-            
+
             fl = new FacturasLin(fli, a, fc, can, precio, descuento, ivaLinea);
 
             /*
@@ -2206,11 +2217,11 @@ public class Main extends javax.swing.JFrame {
                 showTableArticulos();
                 modelLin.removeRow(i);
             }
-            
+
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Asegúrese de elegir una linea de factura en la tabla para eliminar.");
         }
-        
+
 
     }//GEN-LAST:event_btDeleteLinActionPerformed
 
@@ -2222,7 +2233,7 @@ public class Main extends javax.swing.JFrame {
         valores a modificar de los campos de insercion de información.
          */
         try {
-            
+
             FacturasLin fl = new FacturasLin();
 
             //Obtenemos el ID de la fila
@@ -2236,14 +2247,14 @@ public class Main extends javax.swing.JFrame {
             String ref = cbRef.getSelectedItem().toString();
             Articulos a = ca.getRefArticulo(ref);
             fl.getArticulos();
-            
+
             FacturasCab fc = cf.getNumFacCab(numFac);
             //Recogemos valores cantidad, precio, descuento e IVA
             BigDecimal can = fl.getFormattedCantidad(txCantidad.getText());
             BigDecimal precio = fl.getFormattedPrecio(txPrecio.getText());
             BigDecimal descuento = fl.getFormattedDto(txDto.getText());
             BigDecimal ivaLinea = fl.getFormattedIvaLinea(txIva.getText());
-            
+
             fl = new FacturasLin(fli, a, fc, can, precio, descuento, ivaLinea);
 
             /*
@@ -2267,7 +2278,7 @@ public class Main extends javax.swing.JFrame {
                         listaLineaFactura.sort(FacturasLin.ordenarLineas);
                         for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
                             FacturasLin factLin = (FacturasLin) it.next();
-                            
+
                             modelLin.addRow(new Object[]{
                                 factLin.getFacturasCab().getNumfac(),
                                 factLin.getId().getLineafac(),
@@ -2296,7 +2307,7 @@ public class Main extends javax.swing.JFrame {
             } catch (ArrayIndexOutOfBoundsException ax) {
                 JOptionPane.showMessageDialog(null, "Porfavor seleccione la línea de factura para que el stock sea modificado correctamente.");
             }
-            
+
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "Asegúrese de seleccionar un registro en la tabla para ser modificado. "
                     + "Tenga en cuenta que los todos los campos a rellenar son numéricos y recuerde no dejar campos vacíos .");
@@ -2304,8 +2315,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btModifyLinActionPerformed
 
     private void cbDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDescripcionActionPerformed
-        /*String des = (String) cbDescripcion.getSelectedItem();
-        ca.getInfoArticulo(des, lbRef, txCantidad, txPrecio, txIva);*/
+
 
     }//GEN-LAST:event_cbDescripcionActionPerformed
 
@@ -2323,7 +2333,7 @@ public class Main extends javax.swing.JFrame {
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una factura para calcular su total");
         }
-        
+
 
     }//GEN-LAST:event_btCalcularActionPerformed
 
@@ -2344,9 +2354,9 @@ public class Main extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Debes elegir una factura en la ventana de facturas para calcular el total");
             }
-            
+
         } catch (NumberFormatException n) {
-            
+
         }
 
     }//GEN-LAST:event_btCalculoLineasActionPerformed
@@ -2370,23 +2380,23 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btEstadisticasActionPerformed
 
     private void btMostrarEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMostrarEstadisticasActionPerformed
-        
+
         day1 = Integer.parseInt(txFechaUno.getText().substring(0, 2));
         month1 = Integer.parseInt(txFechaUno.getText().substring(3, 5));
         year1 = Integer.parseInt(txFechaUno.getText().substring(6, 10));
         date1 = new java.sql.Date(year1 - 1900, month1 - 1, day1);
-        
+
         day2 = Integer.parseInt(txFechaDos.getText().substring(0, 2));
         month2 = Integer.parseInt(txFechaDos.getText().substring(3, 5));
         year2 = Integer.parseInt(txFechaDos.getText().substring(6, 10));
         date2 = new java.sql.Date(year2 - 1900, month2 - 1, day2);
-        
+
         p.Procedure(
                 cbClienteUno.getSelectedItem().toString(),
                 cbClienteDos.getSelectedItem().toString(),
                 date1,
                 date2);
-        
+
         el = cc.estadisticasList();
         for (EstadisticasClientes e : el) {
             modelEstadisticas.addRow(new Object[]{
@@ -2407,19 +2417,50 @@ public class Main extends javax.swing.JFrame {
             int i = jTableCab.getSelectedRow();
             Long numFac = Long.parseLong(jTableCab.getValueAt(i, 0).toString());
             FacturasCab fc = cf.getNumFacCab(numFac);
-            
+
             try {
-                ExportarXml xml = new ExportarXml();
-                xml.generarDocumento(fc);
-                xml.crearXml();
+                JFileChooser jfc = new JFileChooser();
+                jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                jfc.setCurrentDirectory(new java.io.File("."));
+                int seleccion = jfc.showSaveDialog(this);
+
+                if (seleccion == JFileChooser.APPROVE_OPTION) {
+                    
+                    ExportarXml xml = new ExportarXml();
+                    xml.generarDocumento(fc);
+                    jfc.setSelectedFile(xml.crearXml());
+                    File file = jfc.getSelectedFile();
+
+                }
+
             } catch (ParserConfigurationException | TransformerException ex) {
                 ex.getMessage();
             }
+
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Porfavor, elije el registro en la tabla de facturas que desea exportar");
         }
 
+
     }//GEN-LAST:event_btExportarActionPerformed
+
+    private void cbRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRefActionPerformed
+        Articulos a = ca.getRefArticulo(cbRef.getSelectedItem().toString());
+        cbDescripcion.setSelectedItem(a.getDescripcion());
+        txCantidad.setText(a.getStock().toString());
+        txPrecio.setText(a.getPrecio().toString());
+        txIva.setText(a.getPorciva().toString());
+    }//GEN-LAST:event_cbRefActionPerformed
+
+    private void btImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportarActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("xml files (*.xml)", "xml");
+        jfc.setFileFilter(filtro);
+        int seleccion = jfc.showOpenDialog(this);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            //Aqui realizamos las acciones de importacion
+        }
+    }//GEN-LAST:event_btImportarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2456,7 +2497,7 @@ public class Main extends javax.swing.JFrame {
                 main.setLocationRelativeTo(null);
                 main.setResizable(false);
                 main.setTitle("Ventana de acceso a tienda");
-                
+
             }
         });
     }

@@ -8,12 +8,9 @@ package Controladores;
 import Modelos.FacturasCab;
 import Modelos.FacturasLin;
 import java.io.File;
-import java.io.FileWriter;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.*;
 import javax.xml.transform.OutputKeys;
@@ -46,7 +43,7 @@ public class ExportarXml {
     public void generarDocumento(FacturasCab f) {
         Set facturasLineas = new HashSet(0);
         facturasLineas = f.getFacturasLins();
-
+        
         Element factura = doc.createElement("Factura");
         doc.appendChild(factura);
 
@@ -136,8 +133,9 @@ public class ExportarXml {
 
     }
 
-    public boolean crearXml() throws TransformerException {
+    public File crearXml() throws TransformerException {
         boolean confirmar;
+        File file = null;
         try {
             Transformer trFac = TransformerFactory.newInstance().newTransformer();
 
@@ -147,8 +145,9 @@ public class ExportarXml {
 
             //Definimos la entrada y la salida
             Source src = new DOMSource(doc);
-            Result result = new StreamResult(new File("facturas.xml"));
-
+            Result result = new StreamResult(file = new File("facturas.xml"));
+            
+            
             //Transformamos
             trFac.transform(src, result);
             confirmar = true;
@@ -157,8 +156,7 @@ public class ExportarXml {
             confirmar = false;
             JOptionPane.showMessageDialog(null, "Error al exportar el registo al fichero xml", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        return confirmar;
+        return file;
     }
 
 }

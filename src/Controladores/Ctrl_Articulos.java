@@ -8,9 +8,7 @@ package Controladores;
 import Modelos.Articulos;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -112,24 +110,6 @@ public class Ctrl_Articulos {
             ss.close();
         }
         return articulosList;
-    }
-
-    public void getInfoArticulo(String descripcion, JLabel ref, JTextField can, JTextField precio, JTextField iva) {
-
-        Articulos a = new Articulos();
-        try {
-            operar();
-            a = (Articulos) ss.get(Articulos.class, descripcion);
-            ref.setText(a.getReferencia());
-            can.setText(a.getStock().toString());
-            precio.setText(a.getPrecio().toString());
-            iva.setText(a.getPorciva().toString());
-        } catch (HibernateException he) {
-            JOptionPane.showInternalMessageDialog(null, "" + he.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            ss.close();
-        }
-
     }
 
 }

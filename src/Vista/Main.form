@@ -965,6 +965,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Importar factura"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btImportarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btExportar">
               <Properties>
@@ -1104,11 +1107,9 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cbRef" min="-2" pref="121" max="-2" attributes="0"/>
-                                      <Component id="cbDescripcion" min="-2" pref="210" max="-2" attributes="0"/>
-                                      <Component id="txLineaFac" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="cbRef" min="-2" pref="121" max="-2" attributes="0"/>
+                                  <Component id="cbDescripcion" min="-2" pref="210" max="-2" attributes="0"/>
+                                  <Component id="txLineaFac" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="btDeleteLin" min="-2" max="-2" attributes="0"/>
@@ -1323,6 +1324,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbRefActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
