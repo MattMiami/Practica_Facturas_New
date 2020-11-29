@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.xml.parsers.*;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
@@ -46,10 +47,8 @@ public class ExportarXml {
         Set facturasLineas = new HashSet(0);
         facturasLineas = f.getFacturasLins();
 
-        Element facturas = doc.createElement("Facturas");
-        doc.appendChild(facturas);
         Element factura = doc.createElement("Factura");
-        facturas.appendChild(factura);
+        doc.appendChild(factura);
 
         /*
         Cabecera de facturas
@@ -80,7 +79,7 @@ public class ExportarXml {
             FacturasLin fl = (FacturasLin) it.next();
             Element lineasFac = doc.createElement("lineasFactura");
             factura.appendChild(lineasFac);
-            
+
             Element nFac = doc.createElement("numFactura");
             lineasFac.appendChild(nFac);
             nFac.appendChild(doc.createTextNode(String.valueOf(f.getNumfac())));
@@ -114,7 +113,7 @@ public class ExportarXml {
          */
         Element totales = doc.createElement("totalesFacturas");
         factura.appendChild(totales);
-        
+
         Element nf = doc.createElement("numFactura");
         totales.appendChild(nf);
         nf.appendChild(doc.createTextNode(String.valueOf(f.getNumfac())));
@@ -126,18 +125,19 @@ public class ExportarXml {
         Element impDto = doc.createElement("impDot");
         totales.appendChild(impDto);
         impDto.appendChild(doc.createTextNode(f.getDto().toString()));
-        
+
         Element impIva = doc.createElement("impIva");
         totales.appendChild(impIva);
         impIva.appendChild(doc.createTextNode(f.getIvaTotal().toString()));
-        
+
         Element totalFac = doc.createElement("totalFac");
         totales.appendChild(totalFac);
         totalFac.appendChild(doc.createTextNode(f.getTotal().toString()));
 
     }
 
-    public void crearXml() throws TransformerException {
+    public boolean crearXml() throws TransformerException {
+        boolean confirmar;
         try {
             Transformer trFac = TransformerFactory.newInstance().newTransformer();
 
@@ -151,11 +151,14 @@ public class ExportarXml {
 
             //Transformamos
             trFac.transform(src, result);
-
+            confirmar = true;
+            JOptionPane.showMessageDialog(null, "Exportado correctamente");
         } catch (TransformerConfigurationException | TransformerFactoryConfigurationError ex) {
-            ex.getMessage();
+            confirmar = false;
+            JOptionPane.showMessageDialog(null, "Error al exportar el registo al fichero xml", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
+        return confirmar;
     }
 
 }
