@@ -668,9 +668,9 @@ public class Main extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -681,17 +681,10 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(txStockDisponible)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel7))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel28))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel29)
-                                    .addComponent(jLabel6))))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel28)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel6))
                         .addGap(0, 189, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1947,8 +1940,8 @@ public class Main extends javax.swing.JFrame {
             modelLin.setRowCount(0);
             /*Esto a continuación se debe cuando importamos una factura el numero de factura viene como string
             sabiendo esto lo convertiremos a long , de esta forma al hacer clic en la factura nos devulverá todas sus lineas
-            */
-                
+             */
+
             if (modelFac.getValueAt(jTableCab.getSelectedRow(), 0) instanceof String) {
                 numFac = Long.valueOf(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
             } else {
@@ -2316,8 +2309,13 @@ public class Main extends javax.swing.JFrame {
         Caculamos una factura seleccionada en la ventana de Facturas
          */
         try {
+            Long numFac;
             modelTot.setRowCount(0);
-            Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
+            if (modelFac.getValueAt(jTableCab.getSelectedRow(), 0) instanceof String) {
+                numFac = Long.valueOf(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
+            } else {
+                numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
+            }
             FacturasCab fc = cf.getNumFacCab(numFac);
             modelTot.addRow(new Object[]{
                 fc.getNumfac(), fc.getBaseImp(), fc.getDto(), fc.getIvaTotal(), fc.getTotal()
@@ -2424,11 +2422,16 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btExportarActionPerformed
 
     private void cbRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRefActionPerformed
-        Articulos a = ca.getRefArticulo(cbRef.getSelectedItem().toString());
-        cbDescripcion.setSelectedItem(a.getDescripcion());
-        txCantidad.setText(a.getStock().toString());
-        txPrecio.setText(a.getPrecio().toString());
-        txIva.setText(a.getPorciva().toString());
+        try {
+            Articulos a = ca.getRefArticulo(cbRef.getSelectedItem().toString());
+            cbDescripcion.setSelectedItem(a.getDescripcion());
+            txCantidad.setText(a.getStock().toString());
+            txPrecio.setText(a.getPrecio().toString());
+            txIva.setText(a.getPorciva().toString());
+        } catch (NullPointerException n) {
+
+        }
+
     }//GEN-LAST:event_cbRefActionPerformed
 
     private void btImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportarActionPerformed

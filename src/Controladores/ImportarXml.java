@@ -7,8 +7,6 @@ package Controladores;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -17,7 +15,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -44,16 +41,19 @@ public class ImportarXml {
             //Creamos el objeto Document y su ruta
             Document doc = dbf.parse(new File(RUTA));
             
-            Element raiz = doc.getDocumentElement();
+            //Element raiz = doc.getDocumentElement();
+            //Realizamos una busqueda de la etiqueta "cabecera"
             NodeList nl = doc.getElementsByTagName("cabecera");
-            System.out.println(nl.getLength());
             
             String[] st = new String[3];
-            
+           
+            /*Recorremos esa etiqueta obteniendo los datos de los campos que queramos
+                en mi caso obtendré los datos de numero factura, fecha y dni
+            */
             for (int i = 0; i < nl.getLength(); i++) {
                 Node n = nl.item(i);
                 if (n.getNodeType() == Node.ELEMENT_NODE) {
-                    System.out.println(n);
+                    
                     st[0] = n.getChildNodes().item(1).getTextContent();
                     st[1] = n.getChildNodes().item(7).getTextContent();
                     st[2] = n.getChildNodes().item(3).getTextContent();
