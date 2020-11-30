@@ -271,6 +271,7 @@ public class Main extends javax.swing.JFrame {
         itemInicio1 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        itemHelpClientes = new javax.swing.JMenuItem();
         jdArticulos = new javax.swing.JDialog();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -299,6 +300,7 @@ public class Main extends javax.swing.JFrame {
         itemInicio2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        itemAyudaArticulos = new javax.swing.JMenuItem();
         jdFacturas = new javax.swing.JDialog();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel8 = new javax.swing.JPanel();
@@ -332,6 +334,7 @@ public class Main extends javax.swing.JFrame {
         itemInicio3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jdLineaFactura = new javax.swing.JDialog();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -366,6 +369,7 @@ public class Main extends javax.swing.JFrame {
         itemStock2 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        itemAyudaLineas = new javax.swing.JMenuItem();
         jdEstadisticas = new javax.swing.JDialog();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -379,6 +383,17 @@ public class Main extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         btMostrarEstadisticas = new javax.swing.JButton();
+        jdHelpInicio = new javax.swing.JDialog();
+        jPanel13 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jdHelpClientes = new javax.swing.JDialog();
+        jPanel12 = new javax.swing.JPanel();
+        jTextField2 = new javax.swing.JTextField();
+        jPanel14 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
@@ -388,6 +403,7 @@ public class Main extends javax.swing.JFrame {
         itemStock = new javax.swing.JMenuItem();
         itemLinea = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        itemInicio = new javax.swing.JMenuItem();
 
         jdClientes.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -562,7 +578,11 @@ public class Main extends javax.swing.JFrame {
 
         menuBar1.add(menuOpciones1);
 
-        jMenu3.setText("Help");
+        jMenu3.setText("Ayuda");
+
+        itemHelpClientes.setText("Ayuda gestión clientes");
+        jMenu3.add(itemHelpClientes);
+
         menuBar1.add(jMenu3);
 
         jdClientes.setJMenuBar(menuBar1);
@@ -793,7 +813,11 @@ public class Main extends javax.swing.JFrame {
 
         menuBar2.add(menuOpciones2);
 
-        jMenu4.setText("Help");
+        jMenu4.setText("Ayuda");
+
+        itemAyudaArticulos.setText("Ayuda gestión stock");
+        jMenu4.add(itemAyudaArticulos);
+
         menuBar2.add(jMenu4);
 
         jdArticulos.setJMenuBar(menuBar2);
@@ -1110,7 +1134,11 @@ public class Main extends javax.swing.JFrame {
 
         menuBar3.add(menuOpciones3);
 
-        jMenu5.setText("Help");
+        jMenu5.setText("Ayuda");
+
+        jMenuItem5.setText("Ayuda gestión Facturas");
+        jMenu5.add(jMenuItem5);
+
         menuBar3.add(jMenu5);
 
         jdFacturas.setJMenuBar(menuBar3);
@@ -1400,7 +1428,11 @@ public class Main extends javax.swing.JFrame {
 
         menuBar4.add(menuOpciones4);
 
-        jMenu6.setText("Help");
+        jMenu6.setText("Ayuda");
+
+        itemAyudaLineas.setText("Ayuda gestión desglose facturas");
+        jMenu6.add(itemAyudaLineas);
+
         menuBar4.add(jMenu6);
 
         jdLineaFactura.setJMenuBar(menuBar4);
@@ -1527,6 +1559,115 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTextField1.setFont(new java.awt.Font("Imprint MT Shadow", 0, 36)); // NOI18N
+        jTextField1.setText("Bienvedido");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Se encuentra usted en la página de inicio de gestión de su tienda,\n donde podrá realizar las siguientes actiones:\n\t\n\t*Gestión de Clientes:\n\t\t- Podrá agregar, borrar o modifcar los datos sus clientes.\n\t\t- Tendrá acceso a las facturas realcionadas con sus clientes.\n\t\t- Obtener estadísticas de ventas.\n\t*Gestión  de Facturas:\n\t\t- Podrá agregar, borrar o modifcar las facturas.\n\t\t- Acceder al desglose de  cada factura.\n\t\t- Calcular el total de cada factura.\n\t*Gestión  de Stock:\n\t\t- Podrá agregar, borrar o modifcar los datos sus artículos.\n\t\t\n\n\t\n\t");
+        jScrollPane7.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap(339, Short.MAX_VALUE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(340, 340, 340))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jdHelpInicioLayout = new javax.swing.GroupLayout(jdHelpInicio.getContentPane());
+        jdHelpInicio.getContentPane().setLayout(jdHelpInicioLayout);
+        jdHelpInicioLayout.setHorizontalGroup(
+            jdHelpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdHelpInicioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jdHelpInicioLayout.setVerticalGroup(
+            jdHelpInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdHelpInicioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTextField2.setFont(new java.awt.Font("Imprint MT Shadow", 0, 48)); // NOI18N
+        jTextField2.setText("Gestión de Clientes");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap(233, Short.MAX_VALUE)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(232, 232, 232))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane8.setViewportView(jTextArea2);
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jdHelpClientesLayout = new javax.swing.GroupLayout(jdHelpClientes.getContentPane());
+        jdHelpClientes.getContentPane().setLayout(jdHelpClientesLayout);
+        jdHelpClientesLayout.setHorizontalGroup(
+            jdHelpClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdHelpClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdHelpClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jdHelpClientesLayout.setVerticalGroup(
+            jdHelpClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdHelpClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -1590,6 +1731,20 @@ public class Main extends javax.swing.JFrame {
         menuBar.add(menuOpciones);
 
         jMenu2.setText("Help");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        itemInicio.setText("Ayuda Inicio");
+        itemInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemInicioActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemInicio);
+
         menuBar.add(jMenu2);
 
         setJMenuBar(menuBar);
@@ -2583,7 +2738,7 @@ public class Main extends javax.swing.JFrame {
     private void btBuscarLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarLinActionPerformed
         try {
             if (!txBuscarLin.getText().isEmpty()) {
-                List linea = cf.bucarLineaFac(Long.valueOf(txBuscarLin.getText()));
+                List linea = cf.bucarLineaFac(Long.valueOf(lbNumFac.getText()) ,Long.valueOf(txBuscarLin.getText()));
                 if (!linea.isEmpty()) {
                     modelLin.setRowCount(0);
                     for (Iterator it = linea.iterator(); it.hasNext();) {
@@ -2607,9 +2762,19 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Inserta el número de linea para buscar.");
             }
         } catch (NumberFormatException n) {
-            JOptionPane.showMessageDialog(null, "Por favor, verifíca que has introducido un número.");
+            JOptionPane.showMessageDialog(null, "Por favor verifique que ha introducido el número de línea de forma numérica. Además tenga en cuenta que para buscar una línea de factura debe elegir una factura en la ventana de Facturas.");
         }
     }//GEN-LAST:event_btBuscarLinActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+       
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void itemInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemInicioActionPerformed
+        jdHelpInicio.setVisible(true);
+        jdHelpInicio.pack();
+        jdHelpInicio.setLocationRelativeTo(null);
+    }//GEN-LAST:event_itemInicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2683,6 +2848,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbClientesDisponibles;
     private javax.swing.JComboBox<String> cbDescripcion;
     private javax.swing.JComboBox<String> cbRef;
+    private javax.swing.JMenuItem itemAyudaArticulos;
+    private javax.swing.JMenuItem itemAyudaLineas;
     private javax.swing.JMenuItem itemCli;
     private javax.swing.JMenuItem itemCli1;
     private javax.swing.JMenuItem itemCli2;
@@ -2691,6 +2858,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemFac1;
     private javax.swing.JMenuItem itemFac2;
     private javax.swing.JMenuItem itemFac3;
+    private javax.swing.JMenuItem itemHelpClientes;
+    private javax.swing.JMenuItem itemInicio;
     private javax.swing.JMenuItem itemInicio1;
     private javax.swing.JMenuItem itemInicio2;
     private javax.swing.JMenuItem itemInicio3;
@@ -2732,9 +2901,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2749,6 +2922,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
@@ -2759,10 +2934,16 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable jTableEstadisticas;
     private javax.swing.JTable jTableLinea;
     private javax.swing.JTable jTableTotales;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JDialog jdArticulos;
     private javax.swing.JDialog jdClientes;
     private javax.swing.JDialog jdEstadisticas;
     private javax.swing.JDialog jdFacturas;
+    private javax.swing.JDialog jdHelpClientes;
+    private javax.swing.JDialog jdHelpInicio;
     private javax.swing.JDialog jdLineaFactura;
     private javax.swing.JLabel lbNumFac;
     private javax.swing.JMenuBar menuBar;
