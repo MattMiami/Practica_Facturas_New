@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -179,20 +180,6 @@ public class Ctrl_Facturas {
         }
     }
 
-    public List facturasLinList(Long numFac) {
-        List<FacturasLin> facturasLinList = new ArrayList<FacturasLin>();
-        try {
-            operar();
-            Criteria c = ss.createCriteria(FacturasLin.class);
-            facturasLinList = c.list();
-        } catch (HibernateException he) {
-            JOptionPane.showMessageDialog(null, "" + he.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            ss.close();
-        }
-        return facturasLinList;
-    }
-
  public boolean modifyFacturaLin(FacturasLin f) {
         boolean result;
         try {
@@ -237,6 +224,39 @@ public class Ctrl_Facturas {
             ss.close();
         }
         return f;
+    }
+    
+    
+    public List buscarFactura(Long numFac){
+        List<FacturasCab> lf = new ArrayList<FacturasCab>();
+        try{
+            operar();
+            Query hql = ss.createQuery("from FacturasCab where numfac = :numFac");
+            hql.setParameter("numFac", numFac);
+            lf = hql.list();
+            tx.commit();
+        }catch(HibernateException he){
+            JOptionPane.showMessageDialog(null, "" + he.getMessage());
+        }finally{
+            ss.close();
+        }
+        return lf;
+    }
+    
+    public List bucarLineaFac(Long numLin){
+        List<FacturasLin> lfl = new ArrayList<FacturasLin>();
+        try{
+            operar();
+            Query hql = ss.createQuery("from FacturasLin where lineafac = :numLin");
+            hql.setParameter("numLin", numLin);
+            lfl = hql.list();
+            tx.commit();
+        }catch(HibernateException he){
+            JOptionPane.showMessageDialog(null, "" + he.getMessage());
+        }finally{
+            ss.close();
+        }
+        return lfl;
     }
     
 }

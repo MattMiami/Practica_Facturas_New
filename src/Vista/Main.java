@@ -897,6 +897,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         btBuscarFac.setText("Buscar");
+        btBuscarFac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarFacActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Actualizar Tabla");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -1331,6 +1336,11 @@ public class Main extends javax.swing.JFrame {
         );
 
         btBuscarLin.setText("Buscar");
+        btBuscarLin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarLinActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -2516,7 +2526,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btBuscarArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarArtActionPerformed
         /*
-        Buscamos el cliente por el numero de dni
+        Buscamos el artículo por referencia
          */
         if (!txBuscarArt.getText().isEmpty()) {
             List articulo = ca.bucarArticulos(txBuscarArt.getText());
@@ -2541,6 +2551,65 @@ public class Main extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btBuscarArtActionPerformed
+
+    private void btBuscarFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarFacActionPerformed
+        try {
+            if (!txBuscarFac.getText().isEmpty()) {
+                List factura = cf.buscarFactura(Long.valueOf(txBuscarFac.getText()));
+                if (!factura.isEmpty()) {
+                    for (Iterator it = factura.iterator(); it.hasNext();) {
+                        FacturasCab f = (FacturasCab) it.next();
+                        {
+                            modelFac.setRowCount(0);
+                            modelFac.addRow(new Object[]{
+                                f.getNumfac(),
+                                f.getFechaFormat(),
+                                f.getClientes().getDnicif()
+                            });
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La factura no existe.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Inserta el número de factura para buscar.");
+            }
+        } catch (NumberFormatException n) {
+            JOptionPane.showMessageDialog(null, "Por favor, verifíca que has introducido un número.");
+        }
+
+    }//GEN-LAST:event_btBuscarFacActionPerformed
+
+    private void btBuscarLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarLinActionPerformed
+        try {
+            if (!txBuscarLin.getText().isEmpty()) {
+                List linea = cf.bucarLineaFac(Long.valueOf(txBuscarLin.getText()));
+                if (!linea.isEmpty()) {
+                    modelLin.setRowCount(0);
+                    for (Iterator it = linea.iterator(); it.hasNext();) {
+                        FacturasLin f = (FacturasLin) it.next();
+                        {
+                            modelLin.addRow(new Object[]{
+                                f.getFacturasCab().getNumfac(),
+                                f.getId().getLineafac(),
+                                f.getArticulos().getReferencia(),
+                                f.getCantidad(),
+                                f.getPrecio(),
+                                f.getDtolinea(),
+                                f.getIvalinea()
+                            });
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La linea de factura no existe.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Inserta el número de linea para buscar.");
+            }
+        } catch (NumberFormatException n) {
+            JOptionPane.showMessageDialog(null, "Por favor, verifíca que has introducido un número.");
+        }
+    }//GEN-LAST:event_btBuscarLinActionPerformed
 
     /**
      * @param args the command line arguments
