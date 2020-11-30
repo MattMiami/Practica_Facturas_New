@@ -10,7 +10,7 @@ import Controladores.Ctrl_Clientes;
 import Controladores.Ctrl_Entrada;
 import Controladores.Ctrl_Facturas;
 import Controladores.ExportarXml;
-import Controladores.NewHibernateUtil;
+import Controladores.ImportarXml;
 import Controladores.Procedure;
 import Modelos.Articulos;
 import Modelos.Clientes;
@@ -19,7 +19,7 @@ import Modelos.FacturasCab;
 import Modelos.FacturasLin;
 import Modelos.FacturasLinId;
 import Modelos.FacturasTot;
-import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,29 +28,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -1928,6 +1910,7 @@ public class Main extends javax.swing.JFrame {
         txNumFacCab.setText(modelFac.getValueAt(i, 0).toString());
         txFecha.setText(modelFac.getValueAt(i, 1).toString());
         cbClientesDisponibles.setSelectedItem(modelFac.getValueAt(i, 2).toString());
+        Long numFac;
         /*
         Activa los botones para ver mas detalles eliminarla o modificar  la factura seleccionada
          */
@@ -1939,7 +1922,7 @@ public class Main extends javax.swing.JFrame {
         Si la tabla FacturasLin esta vacía, procede a rellenarla.
          */
         if (modelLin.getRowCount() == -1) {
-            Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
+            numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
             FacturasCab fc = cf.getNumFacCab(numFac);
             lbNumFac.setText(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
             List listaLineaFactura = new ArrayList(fc.getFacturasLins());
@@ -1962,7 +1945,16 @@ public class Main extends javax.swing.JFrame {
              */
         } else {
             modelLin.setRowCount(0);
-            Long numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
+            /*Esto a continuación se debe cuando importamos una factura el numero de factura viene como string
+            sabiendo esto lo convertiremos a long , de esta forma al hacer clic en la factura nos devulverá todas sus lineas
+            */
+                
+            if (modelFac.getValueAt(jTableCab.getSelectedRow(), 0) instanceof String) {
+                numFac = Long.valueOf(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
+            } else {
+                numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
+            }
+
             FacturasCab fc = cf.getNumFacCab(numFac);
             lbNumFac.setText(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
             List listaLineaFactura = new ArrayList(fc.getFacturasLins());
@@ -2440,12 +2432,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_cbRefActionPerformed
 
     private void btImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportarActionPerformed
-        JFileChooser jfc = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("xml files (*.xml)", "xml");
-        jfc.setFileFilter(filtro);
-        int seleccion = jfc.showOpenDialog(this);
-        if (seleccion == JFileChooser.APPROVE_OPTION) {
-            //Aqui realizamos las acciones de importacion
+        try {
+            ImportarXml importar = new ImportarXml(jTableCab);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btImportarActionPerformed
 
