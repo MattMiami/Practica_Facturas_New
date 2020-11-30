@@ -68,7 +68,7 @@ public class ExportarXml {
 
         Element fecha = doc.createElement("fecha");
         facCab.appendChild(fecha);
-        fecha.appendChild(doc.createTextNode(f.getFechafac().toString()));
+        fecha.appendChild(doc.createTextNode(f.getFechaFormat()));
 
         /*
         Nodos de Lineas de factura
