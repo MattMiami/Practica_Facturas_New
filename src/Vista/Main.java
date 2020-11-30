@@ -1941,7 +1941,6 @@ public class Main extends javax.swing.JFrame {
             /*Esto a continuación se debe cuando importamos una factura el numero de factura viene como string
             sabiendo esto lo convertiremos a long , de esta forma al hacer clic en la factura nos devulverá todas sus lineas
              */
-
             if (modelFac.getValueAt(jTableCab.getSelectedRow(), 0) instanceof String) {
                 numFac = Long.valueOf(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
             } else {
@@ -2133,24 +2132,34 @@ public class Main extends javax.swing.JFrame {
             BigDecimal ivalinea = fl.getFormattedIvaLinea(txIva.getText());
 
             fl = new FacturasLin(fli, a, fc, can, precio, dto, ivalinea);
+
+            /*
+            Comprobamos el stock en tienda
+             */
+            if (a.getStock().subtract(can).signum() < 0) {
+                JOptionPane.showMessageDialog(null, "Out of Stock. "
+                        + " Disponemos de " + a.getStock() + " unidad(es) en tienda.");
+            } else {
             /*
             Si añadimos correctamente, modificamos el stock y actualizamos la tabla.
-             */
-            if (cf.addFacturasLin(fl)) {
-                fl.getArticulos();
-                a.setStock(a.getStock().subtract(can));
-                ca.modifyArticulos(a);
-                showTableArticulos();
+            */
+                if (cf.addFacturasLin(fl)) {
+                    fl.getArticulos();
 
-                modelLin.addRow(new Object[]{
-                    fl.getId().getNumfac(),
-                    fl.getId().getLineafac(),
-                    fl.getArticulos().getReferencia(),
-                    fl.getCantidad(),
-                    fl.getPrecio(),
-                    fl.getDtolinea(),
-                    fl.getIvalinea()
-                });
+                    a.setStock(a.getStock().subtract(can));
+                    ca.modifyArticulos(a);
+                    showTableArticulos();
+
+                    modelLin.addRow(new Object[]{
+                        fl.getId().getNumfac(),
+                        fl.getId().getLineafac(),
+                        fl.getArticulos().getReferencia(),
+                        fl.getCantidad(),
+                        fl.getPrecio(),
+                        fl.getDtolinea(),
+                        fl.getIvalinea()
+                    });
+                }
             }
 
         } catch (NumberFormatException n) {
@@ -2252,42 +2261,50 @@ public class Main extends javax.swing.JFrame {
                 /*
                 Modificamos la linea
                  */
-                if (cf.modifyFacturaLin(fl)) {
-                    /*
+ /*
+                Comprobamos el stock en tienda
+                 */
+                if (a.getStock().subtract(can).signum() < 0) {
+                    JOptionPane.showMessageDialog(null, "Out of Stock. "
+                            + " Disponemos de " + a.getStock() + " unidad(es) en tienda.");
+                } else {
+                    if (cf.modifyFacturaLin(fl)) {
+                        /*
                     Actualizamos la tabla Lineas de facturas
-                     */
-                    try {
-                        modelLin.setRowCount(0);
-                        FacturasCab fcActualizar = cf.getNumFacCab(Long.parseLong(lbNumFac.getText()));
-                        List listaLineaFactura = new ArrayList(fcActualizar.getFacturasLins());
-                        listaLineaFactura.sort(FacturasLin.ordenarLineas);
-                        for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
-                            FacturasLin factLin = (FacturasLin) it.next();
+                         */
+                        try {
+                            modelLin.setRowCount(0);
+                            FacturasCab fcActualizar = cf.getNumFacCab(Long.parseLong(lbNumFac.getText()));
+                            List listaLineaFactura = new ArrayList(fcActualizar.getFacturasLins());
+                            listaLineaFactura.sort(FacturasLin.ordenarLineas);
+                            for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
+                                FacturasLin factLin = (FacturasLin) it.next();
 
-                            modelLin.addRow(new Object[]{
-                                factLin.getFacturasCab().getNumfac(),
-                                factLin.getId().getLineafac(),
-                                factLin.getArticulos().getReferencia(),
-                                factLin.getCantidad().toString(),
-                                factLin.getPrecio().toString(),
-                                factLin.getDtolinea().toString(),
-                                factLin.getIvalinea()});
+                                modelLin.addRow(new Object[]{
+                                    factLin.getFacturasCab().getNumfac(),
+                                    factLin.getId().getLineafac(),
+                                    factLin.getArticulos().getReferencia(),
+                                    factLin.getCantidad().toString(),
+                                    factLin.getPrecio().toString(),
+                                    factLin.getDtolinea().toString(),
+                                    factLin.getIvalinea()});
+                            }
+                        } catch (NumberFormatException n) {
                         }
-                    } catch (NumberFormatException n) {
                     }
-                }
-                /*modificamos el stock del artículo, si añadimos más unidades 
+                    /*modificamos el stock del artículo, si añadimos más unidades 
                 restará a la cantidad total del stock, si por el contrario quitamos
                 unidades de la linea de factura sumará esas cantidades al stock.
-                 */
-                if (cantidadActual.compareTo(can) < 0) {
-                    a.setStock(a.getStock().subtract(can));
-                    ca.modifyArticulos(a);
-                    showTableArticulos();
-                } else {
-                    a.setStock(a.getStock().add(cantidadActual).subtract(can));
-                    ca.modifyArticulos(a);
-                    showTableArticulos();
+                     */
+                    if (cantidadActual.compareTo(can) < 0) {
+                        a.setStock(a.getStock().subtract(can));
+                        ca.modifyArticulos(a);
+                        showTableArticulos();
+                    } else {
+                        a.setStock(a.getStock().add(cantidadActual).subtract(can));
+                        ca.modifyArticulos(a);
+                        showTableArticulos();
+                    }
                 }
             } catch (ArrayIndexOutOfBoundsException ax) {
                 JOptionPane.showMessageDialog(null, "Porfavor seleccione la línea de factura para que el stock sea modificado correctamente.");
