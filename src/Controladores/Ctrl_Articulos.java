@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -110,6 +111,22 @@ public class Ctrl_Articulos {
             ss.close();
         }
         return articulosList;
+    }
+    
+    public List bucarArticulos(String ref){
+        List<Articulos> la = new ArrayList<Articulos>();
+        try{
+            operar();
+            Query hql = ss.createQuery("from Articulos where referencia = :ref");
+            hql.setParameter("ref", ref);
+            la = hql.list();
+            tx.commit();
+        }catch(HibernateException he){
+            JOptionPane.showMessageDialog(null, "" + he.getMessage());
+        }finally{
+            ss.close();
+        }
+        return la;
     }
 
 }
