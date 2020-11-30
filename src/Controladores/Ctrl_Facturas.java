@@ -243,11 +243,12 @@ public class Ctrl_Facturas {
         return lf;
     }
     
-    public List bucarLineaFac(Long numLin){
+    public List bucarLineaFac(Long numfac, Long numLin){
         List<FacturasLin> lfl = new ArrayList<FacturasLin>();
         try{
             operar();
-            Query hql = ss.createQuery("from FacturasLin where lineafac = :numLin");
+            Query hql = ss.createQuery("from FacturasLin where numfac = :numfac and lineafac = :numLin");
+            hql.setParameter("numfac", numfac);
             hql.setParameter("numLin", numLin);
             lfl = hql.list();
             tx.commit();
