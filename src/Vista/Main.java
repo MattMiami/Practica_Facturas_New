@@ -32,6 +32,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import org.hibernate.HibernateException;
 import org.xml.sax.SAXException;
 
 /**
@@ -39,7 +40,7 @@ import org.xml.sax.SAXException;
  * @author Antonio Mateos
  */
 public class Main extends javax.swing.JFrame {
-
+    
     Procedure p = new Procedure();
     Ctrl_Clientes cc;
     Ctrl_Articulos ca;
@@ -49,7 +50,7 @@ public class Main extends javax.swing.JFrame {
     private List<Articulos> al = new ArrayList<Articulos>();
     private List<FacturasCab> fl = new ArrayList<FacturasCab>();
     private List<EstadisticasClientes> el = new ArrayList<EstadisticasClientes>();
-
+    
     Integer day1;
     Integer day2;
     Integer month1;
@@ -58,7 +59,7 @@ public class Main extends javax.swing.JFrame {
     Integer year2;
     java.sql.Date date1;
     java.sql.Date date2;
-
+    
     DefaultTableModel modelArt;
     String[] columnasArt = {"Referencia", "Descripción", "Precio", "IVA", "Cantidad Stock"};
 
@@ -88,7 +89,7 @@ public class Main extends javax.swing.JFrame {
      */
     DefaultTableModel modelCli;
     String[] columnasCli = {"DNI-CIF", "Nombre"};
-
+    
     public void showTableClientes() {
         modelCli = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -101,7 +102,7 @@ public class Main extends javax.swing.JFrame {
         for (Clientes c : cl) {
             modelCli.addRow(new Object[]{c.getDnicif(), c.getNombrecli()});
         }
-
+        
         jTableClientes.setModel(modelCli);
     }
 
@@ -110,7 +111,7 @@ public class Main extends javax.swing.JFrame {
      */
     DefaultTableModel modelFac;
     String[] columnasFac = {"NºFactura", "Fecha", "DNI-CIF"};
-
+    
     public void showTableFacturas() {
         modelFac = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -133,7 +134,7 @@ public class Main extends javax.swing.JFrame {
      */
     DefaultTableModel modelLin;
     String[] columnasLin = {"NºFactura", "Linea factura", "Referencia", "Cantidad", "Precio", "Descuento", "IVA linea"};
-
+    
     public void showTableFacturasLin() {
         modelLin = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -147,7 +148,7 @@ public class Main extends javax.swing.JFrame {
         modelLin.addColumn(columnasLin[4]);
         modelLin.addColumn(columnasLin[5]);
         modelLin.addColumn(columnasLin[6]);
-
+        
         jTableLinea.setModel(modelLin);
     }
 
@@ -156,7 +157,7 @@ public class Main extends javax.swing.JFrame {
      */
     DefaultTableModel modelTot;
     String[] columnasTot = {"NºFactura", "Base imponible", "Importe descuento", "Importe IVA", "Total factura"};
-
+    
     public void showTableFacturasTot() {
         modelTot = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -168,13 +169,13 @@ public class Main extends javax.swing.JFrame {
         modelTot.addColumn(columnasTot[2]);
         modelTot.addColumn(columnasTot[3]);
         modelTot.addColumn(columnasTot[4]);
-
+        
         jTableTotales.setModel(modelTot);
     }
-
+    
     DefaultTableModel modelEstadisticas;
     String[] columnasEst = {"Año", "Número Mes", "Nombre Mes", "DNI-CIF", "NOMBRE CLIENTE", "SUMA BASE", "SUMA DTO", "SUMA IVA", "SUMA TOTALES"};
-
+    
     public void showTableEstadisticas() {
         modelEstadisticas = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
@@ -190,16 +191,16 @@ public class Main extends javax.swing.JFrame {
         modelEstadisticas.addColumn(columnasEst[6]);
         modelEstadisticas.addColumn(columnasEst[7]);
         modelEstadisticas.addColumn(columnasEst[8]);
-
+        
         jTableEstadisticas.setModel(modelEstadisticas);
     }
-
+    
     public Main() {
         initComponents();
         cc = new Ctrl_Clientes();
         ca = new Ctrl_Articulos();
         cf = new Ctrl_Facturas();
-
+        
         jdArticulos.pack();
         jdArticulos.setLocationRelativeTo(null);
         jdArticulos.setResizable(false);
@@ -220,7 +221,7 @@ public class Main extends javax.swing.JFrame {
         jdEstadisticas.setLocationRelativeTo(jdClientes);
         jdEstadisticas.pack();
         jdEstadisticas.setTitle("Estadíticas de ventas");
-
+        
         showTableClientes();
         showTableArticulos();
         showTableFacturas();
@@ -232,7 +233,7 @@ public class Main extends javax.swing.JFrame {
         cc.fillComboBox(cbClienteDos);
         cf.fillComboDescripcion(cbDescripcion);
         cf.fillComboRef(cbRef);
-
+        
     }
 
     /**
@@ -256,7 +257,7 @@ public class Main extends javax.swing.JFrame {
         btFacAsociadas = new javax.swing.JButton();
         btEstadisticas = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
-        txBucarCli = new javax.swing.JTextField();
+        txBuscarCli = new javax.swing.JTextField();
         btBuscarCli = new javax.swing.JButton();
         btAddCli = new javax.swing.JButton();
         btDeleteCli = new javax.swing.JButton();
@@ -355,6 +356,9 @@ public class Main extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         lbNumFac = new javax.swing.JLabel();
         btCalculoLineas = new javax.swing.JButton();
+        jPanel11 = new javax.swing.JPanel();
+        btBuscarLin = new javax.swing.JButton();
+        txBuscarLin = new javax.swing.JTextField();
         menuBar4 = new javax.swing.JMenuBar();
         menuOpciones4 = new javax.swing.JMenu();
         itemCli1 = new javax.swing.JMenuItem();
@@ -580,7 +584,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jdClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jdClientesLayout.createSequentialGroup()
-                        .addComponent(txBucarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txBuscarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btBuscarCli)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -597,7 +601,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(jdClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txBucarCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txBuscarCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btBuscarCli)
                     .addComponent(btAddCli)
                     .addComponent(btDeleteCli)
@@ -918,24 +922,22 @@ public class Main extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(btAddFac)
+                        .addGap(1, 1, 1)
+                        .addComponent(btDeleteFac)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btModifyFac))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(btAddFac)
-                                .addGap(1, 1, 1)
-                                .addComponent(btDeleteFac)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btModifyFac))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txNumFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbClientesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btDetalles))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txNumFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbClientesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btDetalles)))
                     .addComponent(jLabel4)
                     .addComponent(jLabel10))
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
@@ -1264,7 +1266,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(btModifyLin)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(161, 161, 161))
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1320,7 +1322,29 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21)
                             .addComponent(txIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btBuscarLin.setText("Buscar");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txBuscarLin, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btBuscarLin)
+                .addGap(15, 15, 15))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addGap(0, 8, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btBuscarLin)
+                    .addComponent(txBuscarLin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         menuBar4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1370,21 +1394,21 @@ public class Main extends javax.swing.JFrame {
         jdLineaFactura.getContentPane().setLayout(jdLineaFacturaLayout);
         jdLineaFacturaLayout.setHorizontalGroup(
             jdLineaFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1067, Short.MAX_VALUE)
-            .addGroup(jdLineaFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jdLineaFacturaLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 1055, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jdLineaFacturaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdLineaFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         jdLineaFacturaLayout.setVerticalGroup(
             jdLineaFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
-            .addGroup(jdLineaFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jdLineaFacturaLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdLineaFacturaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jdEstadisticas.setModalityType(java.awt.Dialog.ModalityType.DOCUMENT_MODAL);
@@ -1685,7 +1709,7 @@ public class Main extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacíos o añadir un cliente que ya exista.");
         }
-
+        
 
     }//GEN-LAST:event_btAddCliActionPerformed
 
@@ -1708,12 +1732,12 @@ public class Main extends javax.swing.JFrame {
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Asegúrate de haber seleccionado un cliente en la tabla para eliminar.");
         }
-
+        
 
     }//GEN-LAST:event_btDeleteCliActionPerformed
 
     private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClientesMouseClicked
-
+        
         btFacAsociadas.setEnabled(true);
         btDeleteCli.setEnabled(true);
         btModCli.setEnabled(true);
@@ -1750,7 +1774,29 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btModCliActionPerformed
 
     private void btBuscarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarCliActionPerformed
-
+        /*
+        Buscamos el cliente por el numero de dni
+        */
+        if(!txBuscarCli.getText().isEmpty()){
+            List cliente = cc.bucarClientes(txBuscarCli.getText());
+            if (!cliente.isEmpty()) {
+                for (Iterator it = cliente.iterator(); it.hasNext();) {
+                    Clientes c = (Clientes) it.next();
+                    {
+                        modelCli.setRowCount(0);
+                        modelCli.addRow(new Object[]{
+                            c.getDnicif(),
+                            c.getNombrecli()});
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El cliente no existe.");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Inserta el nombre del cliente para buscar.");
+        }
+            
+        
     }//GEN-LAST:event_btBuscarCliActionPerformed
 
     private void btAddArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddArtActionPerformed
@@ -1767,7 +1813,7 @@ public class Main extends javax.swing.JFrame {
             a.setPorciva(bd2);
             BigDecimal bd3 = a.getFormattedStock(txStockDisponible.getText());
             a.setStock(bd3);
-
+            
             if (ca.addArticulo(a)) {
                 if (!txRefArticulo.getText().isEmpty() || !txDescripcion.getText().isEmpty() || !txPrecioArticulo.getText().isEmpty() || !txIvaArt.getText().isEmpty() || !txStockDisponible.getText().isEmpty()) {
                     modelArt.setRowCount(0);
@@ -1788,9 +1834,9 @@ public class Main extends javax.swing.JFrame {
             }
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacíos, además asegúrate de insertar correctamente los datos. Ejemplo: el campo cantidad o IVA deben ser numéricos.");
-
+            
         }
-
+        
 
     }//GEN-LAST:event_btAddArtActionPerformed
 
@@ -1865,7 +1911,7 @@ public class Main extends javax.swing.JFrame {
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacíos, además asegúrate de insertar correctamente los datos. Ejemplo: el campo cantidad o IVA deben ser numéricos.");
         }
-
+        
 
     }//GEN-LAST:event_btModArtActionPerformed
 
@@ -1946,14 +1992,14 @@ public class Main extends javax.swing.JFrame {
             } else {
                 numFac = (Long) modelFac.getValueAt(jTableCab.getSelectedRow(), 0);
             }
-
+            
             FacturasCab fc = cf.getNumFacCab(numFac);
             lbNumFac.setText(modelFac.getValueAt(jTableCab.getSelectedRow(), 0).toString());
             List listaLineaFactura = new ArrayList(fc.getFacturasLins());
             if (listaLineaFactura != null) {
                 listaLineaFactura.sort(FacturasLin.ordenarLineas);
                 for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
-
+                    
                     FacturasLin fl = (FacturasLin) it.next();
                     modelLin.addRow(new Object[]{
                         fl.getFacturasCab().getNumfac(),
@@ -1964,15 +2010,15 @@ public class Main extends javax.swing.JFrame {
                         fl.getDtolinea().toString(),
                         fl.getIvalinea()});
                 }
-
+                
             }
         }
-
+        
 
     }//GEN-LAST:event_jTableCabMouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
+        
         showTableFacturas();
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1980,7 +2026,7 @@ public class Main extends javax.swing.JFrame {
         /*
         Obtenemos los valores de los campos para añadir una nueva factura
          */
-
+        
         try {
             Clientes c = cc.getClientesDni((String) cbClientesDisponibles.getSelectedItem());
             FacturasCab f = new FacturasCab(Long.parseLong(txNumFacCab.getText()), c);
@@ -2003,11 +2049,11 @@ public class Main extends javax.swing.JFrame {
                     }
                 }
             }
-
+            
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "Campos vacios");
         }
-
+        
 
     }//GEN-LAST:event_btAddFacActionPerformed
 
@@ -2071,7 +2117,7 @@ public class Main extends javax.swing.JFrame {
             Long numFac = (Long) modelFac.getValueAt(i, 0);
             String fecha = (String) modelFac.getValueAt(i, 1);
             String dni = (String) modelFac.getValueAt(i, 2);
-
+            
             fc.setNumfac(numFac);
             fc.setFechafac(fc.getFormattedDate(fecha));
             fc.setClientes(cc.getClientesDni(dni));
@@ -2110,7 +2156,7 @@ public class Main extends javax.swing.JFrame {
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "Campos vacíos.");
         }
-
+        
 
     }//GEN-LAST:event_btModifyFacActionPerformed
 
@@ -2130,7 +2176,7 @@ public class Main extends javax.swing.JFrame {
             BigDecimal precio = fl.getFormattedPrecio(txPrecio.getText());
             BigDecimal dto = fl.getFormattedDto(txDto.getText());
             BigDecimal ivalinea = fl.getFormattedIvaLinea(txIva.getText());
-
+            
             fl = new FacturasLin(fli, a, fc, can, precio, dto, ivalinea);
 
             /*
@@ -2140,16 +2186,16 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Out of Stock. "
                         + " Disponemos de " + a.getStock() + " unidad(es) en tienda.");
             } else {
-            /*
+                /*
             Si añadimos correctamente, modificamos el stock y actualizamos la tabla.
-            */
+                 */
                 if (cf.addFacturasLin(fl)) {
                     fl.getArticulos();
-
+                    
                     a.setStock(a.getStock().subtract(can));
                     ca.modifyArticulos(a);
                     showTableArticulos();
-
+                    
                     modelLin.addRow(new Object[]{
                         fl.getId().getNumfac(),
                         fl.getId().getLineafac(),
@@ -2161,12 +2207,12 @@ public class Main extends javax.swing.JFrame {
                     });
                 }
             }
-
+            
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacios, además asegúrese de que todos los datos introducidos son numéricos.");
-
+            
         }
-
+        
 
     }//GEN-LAST:event_btAddLinActionPerformed
 
@@ -2175,7 +2221,7 @@ public class Main extends javax.swing.JFrame {
             /*
             Recogemos los valores de una fila seleccionada para eliminar ese objeto linea
              */
-
+            
             int i = jTableLinea.getSelectedRow();
             FacturasLin fl = new FacturasLin();
             Long numFac = (Long) modelLin.getValueAt(i, 0);
@@ -2183,14 +2229,14 @@ public class Main extends javax.swing.JFrame {
             FacturasLinId fli = new FacturasLinId(numFac, nLinea);
             FacturasCab fc = cf.getNumFacCab(numFac);
             String ref = (String) modelLin.getValueAt(i, 2);
-
+            
             Articulos a = ca.getRefArticulo(ref);
-
+            
             BigDecimal can = fl.getFormattedCantidad(modelLin.getValueAt(i, 3).toString());
             BigDecimal precio = fl.getFormattedPrecio(modelLin.getValueAt(i, 4).toString());
             BigDecimal descuento = fl.getFormattedDto(modelLin.getValueAt(i, 5).toString());
             BigDecimal ivaLinea = fl.getFormattedIvaLinea(modelLin.getValueAt(i, 6).toString());
-
+            
             fl.setId(fli);
             fl.setArticulos(a);
             fl.setFacturasCab(fc);
@@ -2198,7 +2244,7 @@ public class Main extends javax.swing.JFrame {
             fl.setPrecio(precio);
             fl.setDtolinea(descuento);
             fl.setIvalinea(ivaLinea);
-
+            
             fl = new FacturasLin(fli, a, fc, can, precio, descuento, ivaLinea);
 
             /*
@@ -2211,11 +2257,11 @@ public class Main extends javax.swing.JFrame {
                 showTableArticulos();
                 modelLin.removeRow(i);
             }
-
+            
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Asegúrese de elegir una linea de factura en la tabla para eliminar.");
         }
-
+        
 
     }//GEN-LAST:event_btDeleteLinActionPerformed
 
@@ -2227,7 +2273,7 @@ public class Main extends javax.swing.JFrame {
         valores a modificar de los campos de insercion de información.
          */
         try {
-
+            
             FacturasLin fl = new FacturasLin();
 
             //Obtenemos el ID de la fila
@@ -2241,14 +2287,14 @@ public class Main extends javax.swing.JFrame {
             String ref = cbRef.getSelectedItem().toString();
             Articulos a = ca.getRefArticulo(ref);
             fl.getArticulos();
-
+            
             FacturasCab fc = cf.getNumFacCab(numFac);
             //Recogemos valores cantidad, precio, descuento e IVA
             BigDecimal can = fl.getFormattedCantidad(txCantidad.getText());
             BigDecimal precio = fl.getFormattedPrecio(txPrecio.getText());
             BigDecimal descuento = fl.getFormattedDto(txDto.getText());
             BigDecimal ivaLinea = fl.getFormattedIvaLinea(txIva.getText());
-
+            
             fl = new FacturasLin(fli, a, fc, can, precio, descuento, ivaLinea);
 
             /*
@@ -2279,7 +2325,7 @@ public class Main extends javax.swing.JFrame {
                             listaLineaFactura.sort(FacturasLin.ordenarLineas);
                             for (Iterator it = listaLineaFactura.iterator(); it.hasNext();) {
                                 FacturasLin factLin = (FacturasLin) it.next();
-
+                                
                                 modelLin.addRow(new Object[]{
                                     factLin.getFacturasCab().getNumfac(),
                                     factLin.getId().getLineafac(),
@@ -2309,7 +2355,7 @@ public class Main extends javax.swing.JFrame {
             } catch (ArrayIndexOutOfBoundsException ax) {
                 JOptionPane.showMessageDialog(null, "Porfavor seleccione la línea de factura para que el stock sea modificado correctamente.");
             }
-
+            
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "Asegúrese de seleccionar un registro en la tabla para ser modificado. "
                     + "Tenga en cuenta que los todos los campos a rellenar son numéricos y recuerde no dejar campos vacíos .");
@@ -2317,7 +2363,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btModifyLinActionPerformed
 
     private void cbDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDescripcionActionPerformed
-
+        
 
     }//GEN-LAST:event_cbDescripcionActionPerformed
 
@@ -2340,7 +2386,7 @@ public class Main extends javax.swing.JFrame {
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una factura para calcular su total");
         }
-
+        
 
     }//GEN-LAST:event_btCalcularActionPerformed
 
@@ -2361,9 +2407,9 @@ public class Main extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Debes elegir una factura en la ventana de facturas para calcular el total");
             }
-
+            
         } catch (NumberFormatException n) {
-
+            
         }
 
     }//GEN-LAST:event_btCalculoLineasActionPerformed
@@ -2387,23 +2433,23 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btEstadisticasActionPerformed
 
     private void btMostrarEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMostrarEstadisticasActionPerformed
-
+        
         day1 = Integer.parseInt(txFechaUno.getText().substring(0, 2));
         month1 = Integer.parseInt(txFechaUno.getText().substring(3, 5));
         year1 = Integer.parseInt(txFechaUno.getText().substring(6, 10));
         date1 = new java.sql.Date(year1 - 1900, month1 - 1, day1);
-
+        
         day2 = Integer.parseInt(txFechaDos.getText().substring(0, 2));
         month2 = Integer.parseInt(txFechaDos.getText().substring(3, 5));
         year2 = Integer.parseInt(txFechaDos.getText().substring(6, 10));
         date2 = new java.sql.Date(year2 - 1900, month2 - 1, day2);
-
+        
         p.Procedure(
                 cbClienteUno.getSelectedItem().toString(),
                 cbClienteDos.getSelectedItem().toString(),
                 date1,
                 date2);
-
+        
         el = cc.estadisticasList();
         for (EstadisticasClientes e : el) {
             modelEstadisticas.addRow(new Object[]{
@@ -2424,17 +2470,17 @@ public class Main extends javax.swing.JFrame {
             int i = jTableCab.getSelectedRow();
             Long numFac = Long.parseLong(jTableCab.getValueAt(i, 0).toString());
             FacturasCab fc = cf.getNumFacCab(numFac);
-
+            
             ExportarXml xml = new ExportarXml();
             xml.generarDocumento(fc);
             xml.crearXml();
-
+            
         } catch (ParserConfigurationException | TransformerException ex) {
             ex.getMessage();
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Porfavor, elije el registro en la tabla de facturas que desea exportar");
         }
-
+        
 
     }//GEN-LAST:event_btExportarActionPerformed
 
@@ -2446,7 +2492,7 @@ public class Main extends javax.swing.JFrame {
             txPrecio.setText(a.getPrecio().toString());
             txIva.setText(a.getPorciva().toString());
         } catch (NullPointerException n) {
-
+            
         }
 
     }//GEN-LAST:event_cbRefActionPerformed
@@ -2498,7 +2544,7 @@ public class Main extends javax.swing.JFrame {
                 main.setLocationRelativeTo(null);
                 main.setResizable(false);
                 main.setTitle("Ventana de acceso a tienda");
-
+                
             }
         });
     }
@@ -2513,6 +2559,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btBuscarArt;
     private javax.swing.JButton btBuscarCli;
     private javax.swing.JButton btBuscarFac;
+    private javax.swing.JButton btBuscarLin;
     private javax.swing.JButton btCalcular;
     private javax.swing.JButton btCalculoLineas;
     private javax.swing.JButton btDeleteArt;
@@ -2585,6 +2632,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2626,8 +2674,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu menuOpciones3;
     private javax.swing.JMenu menuOpciones4;
     private javax.swing.JTextField txBucarArt;
-    private javax.swing.JTextField txBucarCli;
+    private javax.swing.JTextField txBuscarCli;
     private javax.swing.JTextField txBuscarFac;
+    private javax.swing.JTextField txBuscarLin;
     private javax.swing.JTextField txCantidad;
     private javax.swing.JTextField txDescripcion;
     private javax.swing.JTextField txDniCli;

@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -144,4 +145,22 @@ public class Ctrl_Clientes {
         }
         return estadisticasList;
     }
+    
+    public List bucarClientes(String dni){
+        List<Clientes> lc = new ArrayList<Clientes>();
+        try{
+            operar();
+            Query hql = ss.createQuery("from Clientes where dnicif = :dni");
+            hql.setParameter("dni", dni);
+            lc = hql.list();
+            tx.commit();
+        }catch(HibernateException he){
+            JOptionPane.showMessageDialog(null, "" + he.getMessage());
+        }finally{
+            ss.close();
+        }
+        return lc;
+    }   
+    
+    
 }
