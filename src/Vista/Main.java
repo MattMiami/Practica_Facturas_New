@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import javax.swing.UIManager.LookAndFeelInfo;
 import Controladores.Ctrl_Articulos;
 import Controladores.Ctrl_Clientes;
 import Controladores.Ctrl_Entrada;
@@ -32,7 +33,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-import org.hibernate.HibernateException;
 import org.xml.sax.SAXException;
 
 /**
@@ -385,9 +385,9 @@ public class Main extends javax.swing.JFrame {
         btMostrarEstadisticas = new javax.swing.JButton();
         jdHelpInicio = new javax.swing.JDialog();
         jPanel13 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
         jdHelpClientes = new javax.swing.JDialog();
         jPanel12 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
@@ -468,8 +468,8 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 34, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btEstadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btFacAsociadas))
+                    .addComponent(btFacAsociadas)
+                    .addComponent(btEstadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -1559,14 +1559,15 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTextField1.setFont(new java.awt.Font("Imprint MT Shadow", 0, 36)); // NOI18N
-        jTextField1.setText("Bienvedido");
-
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
         jTextArea1.setRows(5);
         jTextArea1.setText("Se encuentra usted en la página de inicio de gestión de su tienda,\n donde podrá realizar las siguientes actiones:\n\t\n\t*Gestión de Clientes:\n\t\t- Podrá agregar, borrar o modifcar los datos sus clientes.\n\t\t- Tendrá acceso a las facturas realcionadas con sus clientes.\n\t\t- Obtener estadísticas de ventas.\n\t*Gestión  de Facturas:\n\t\t- Podrá agregar, borrar o modifcar las facturas.\n\t\t- Acceder al desglose de  cada factura.\n\t\t- Calcular el total de cada factura.\n\t*Gestión  de Stock:\n\t\t- Podrá agregar, borrar o modifcar los datos sus artículos.\n\t\t\n\n\t\n\t");
         jScrollPane7.setViewportView(jTextArea1);
+
+        jLabel3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
+        jLabel3.setText("Bienvedido");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1574,19 +1575,19 @@ public class Main extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane7)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap(339, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(340, 340, 340))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(294, 294, 294)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -1673,23 +1674,23 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel25.setFont(new java.awt.Font("Imprint MT Shadow", 2, 48)); // NOI18N
-        jLabel25.setText("Gestión de facturas clientes y artículos");
+        jLabel25.setText("INICIO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(jLabel25)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         menuBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1754,9 +1755,9 @@ public class Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 807, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(67, 67, 67)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2738,7 +2739,7 @@ public class Main extends javax.swing.JFrame {
     private void btBuscarLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarLinActionPerformed
         try {
             if (!txBuscarLin.getText().isEmpty()) {
-                List linea = cf.bucarLineaFac(Long.valueOf(lbNumFac.getText()) ,Long.valueOf(txBuscarLin.getText()));
+                List linea = cf.bucarLineaFac(Long.valueOf(lbNumFac.getText()), Long.valueOf(txBuscarLin.getText()));
                 if (!linea.isEmpty()) {
                     modelLin.setRowCount(0);
                     for (Iterator it = linea.iterator(); it.hasNext();) {
@@ -2767,7 +2768,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btBuscarLinActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-       
+
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void itemInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemInicioActionPerformed
@@ -2787,11 +2788,14 @@ public class Main extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+
+                javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+                /* if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                }*/
             }
+
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -2888,6 +2892,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2936,7 +2941,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable jTableTotales;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JDialog jdArticulos;
     private javax.swing.JDialog jdClientes;
