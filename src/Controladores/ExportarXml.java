@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.*;
 import javax.xml.transform.OutputKeys;
@@ -43,7 +44,7 @@ public class ExportarXml {
     public void generarDocumento(FacturasCab f) {
         Set facturasLineas = new HashSet(0);
         facturasLineas = f.getFacturasLins();
-        
+
         Element factura = doc.createElement("Factura");
         doc.appendChild(factura);
 
@@ -143,15 +144,25 @@ public class ExportarXml {
             trFac.setOutputProperty(OutputKeys.METHOD, "xml");
             trFac.setOutputProperty(OutputKeys.INDENT, "yes");
 
-            //Definimos la entrada y la salida
-            Source src = new DOMSource(doc);
-            Result result = new StreamResult(file = new File("facturas.xml"));
-            
-            
-            //Transformamos
-            trFac.transform(src, result);
-            confirmar = true;
-            JOptionPane.showMessageDialog(null, "Exportado correctamente");
+            //Creamos el componente JFileChooser para elegir destino del archivo
+            JFileChooser jfc = new JFileChooser();
+            jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int seleccion = jfc.showSaveDialog(null);
+
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                //Definimos la ruta de destino y añadimos extension
+                String RUTA = jfc.getSelectedFile().getAbsolutePath();
+                if (!RUTA.endsWith(".xml")) {
+                    RUTA += ".xml";
+                //Definimos la entrada y la salida
+                Source src = new DOMSource(doc);
+                Result result = new StreamResult(new File(RUTA));
+                //Transformamos
+                trFac.transform(src, result);
+                confirmar = true;
+                JOptionPane.showMessageDialog(null, "Exportado correctamente");
+                }
+            }
         } catch (TransformerConfigurationException | TransformerFactoryConfigurationError ex) {
             confirmar = false;
             JOptionPane.showMessageDialog(null, "Error al exportar el registo al fichero xml", "Error", JOptionPane.ERROR_MESSAGE);

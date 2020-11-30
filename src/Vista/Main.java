@@ -2418,25 +2418,12 @@ public class Main extends javax.swing.JFrame {
             Long numFac = Long.parseLong(jTableCab.getValueAt(i, 0).toString());
             FacturasCab fc = cf.getNumFacCab(numFac);
 
-            try {
-                JFileChooser jfc = new JFileChooser();
-                jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                jfc.setCurrentDirectory(new java.io.File("."));
-                int seleccion = jfc.showSaveDialog(this);
+            ExportarXml xml = new ExportarXml();
+            xml.generarDocumento(fc);
+            xml.crearXml();
 
-                if (seleccion == JFileChooser.APPROVE_OPTION) {
-                    
-                    ExportarXml xml = new ExportarXml();
-                    xml.generarDocumento(fc);
-                    jfc.setSelectedFile(xml.crearXml());
-                    File file = jfc.getSelectedFile();
-
-                }
-
-            } catch (ParserConfigurationException | TransformerException ex) {
-                ex.getMessage();
-            }
-
+        } catch (ParserConfigurationException | TransformerException ex) {
+            ex.getMessage();
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Porfavor, elije el registro en la tabla de facturas que desea exportar");
         }
