@@ -37,10 +37,8 @@ public class Procedure {
         try {
             conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "AD_TEMA_03_FACTURAS", "AD_TEMA_03_FACTURAS");
             conectarDB = true;
-            System.out.println("CONECTADO A LA BASE DE DATOS");
         } catch (SQLException seo) {
             conectarDB = false;
-            System.out.println("ERROR ESTADISTICA CONECTA A LA BASE DE DATOS ESTADISTICA-> " + seo.getMessage());
         }
         return conectarDB;
     }
@@ -50,7 +48,6 @@ public class Procedure {
         try {
             if (conectarDB()) {
                 Class.forName("oracle.jdbc.driver.OracleDriver");
-                //cc = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "AD_TEMA_03_FACTURAS", "AD_TEMA_03_FACTURAS");
                 CallableStatement cs = conexion.prepareCall("{call SP_ESTADISTICAS (?,?,?,?)}");
                 System.out.println(cs);
                 System.out.println(clienteUno + "" + clienteDos + "" + fechaUno + "" + fechaDos);
@@ -60,12 +57,11 @@ public class Procedure {
                 cs.setDate(4, fechaDos);
                 cs.execute();
                 System.out.println("entra");
-            }else{
+            } else {
                 System.out.println("No conectado");
             }
 
         } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Fallo al ejecutar el procedimiento almacenado", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Error sql  " + ex.getMessage());
         } catch (HibernateException h) {
             System.out.println("Error hibernate  " + h.getMessage());
