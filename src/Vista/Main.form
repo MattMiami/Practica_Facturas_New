@@ -935,14 +935,14 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="btImportar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btExportar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="btCalcular" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1593,14 +1593,14 @@
             <Component class="javax.swing.JFormattedTextField" name="txFechaUno">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="dd/MM/yyyy" subtype="-1" type="1"/>
+                  <Format format="yyyy-MM-dd" subtype="-1" type="1"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="txFechaDos">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="dd/MM/yyyy" subtype="-1" type="1"/>
+                  <Format format="yyyy-MM-dd" subtype="-1" type="1"/>
                 </Property>
               </Properties>
             </Component>

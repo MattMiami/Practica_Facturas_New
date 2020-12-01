@@ -1110,7 +1110,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(btExportar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addComponent(btCalcular)
-                        .addGap(78, 78, 78))))
+                        .addGap(66, 66, 66))))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1503,9 +1503,9 @@ public class Main extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTableEstadisticas);
 
-        txFechaUno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        txFechaUno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
-        txFechaDos.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        txFechaDos.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
         jLabel15.setText("Cliente");
 
@@ -2847,21 +2847,24 @@ public class Main extends javax.swing.JFrame {
 
     private void btMostrarEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMostrarEstadisticasActionPerformed
         
-        day1 = Integer.parseInt(txFechaUno.getText().substring(0, 2));
+      /*  day1 = Integer.parseInt(txFechaUno.getText().substring(0, 2));
         month1 = Integer.parseInt(txFechaUno.getText().substring(3, 5));
         year1 = Integer.parseInt(txFechaUno.getText().substring(6, 10));
-        date1 = new java.sql.Date(year1 - 1900, month1 - 1, day1);
+        date1 = new java.sql.Date(year1 - 1900, month1 - 1, day1);*/
         
-        day2 = Integer.parseInt(txFechaDos.getText().substring(0, 2));
+        java.sql.Date dateSQL1 = java.sql.Date.valueOf(txFechaUno.getText());
+        java.sql.Date dateSQL2 = java.sql.Date.valueOf(txFechaDos.getText());
+        
+      /*  day2 = Integer.parseInt(txFechaDos.getText().substring(0, 2));
         month2 = Integer.parseInt(txFechaDos.getText().substring(3, 5));
         year2 = Integer.parseInt(txFechaDos.getText().substring(6, 10));
-        date2 = new java.sql.Date(year2 - 1900, month2 - 1, day2);
+        date2 = new java.sql.Date(year2 - 1900, month2 - 1, day2);*/
         
         p.Procedure(
                 cbClienteUno.getSelectedItem().toString(),
                 cbClienteDos.getSelectedItem().toString(),
-                date1,
-                date2);
+                dateSQL1,
+                dateSQL2);
         
         el = cc.estadisticasList();
         for (EstadisticasClientes e : el) {
@@ -3059,7 +3062,6 @@ public class Main extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                
                 javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
                 /*if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
