@@ -301,6 +301,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ayuda gesti&#xf3;n clientes"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemHelpClientesActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -623,6 +626,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ayuda gesti&#xf3;n stock"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAyudaArticulosActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -1041,6 +1047,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ayuda gesti&#xf3;n Facturas"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -1062,7 +1071,7 @@
                       <Component id="jPanel9" max="32767" attributes="0"/>
                       <Component id="jPanel11" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="7" max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1087,57 +1096,39 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txIva" min="-2" pref="121" max="-2" attributes="0"/>
-                                  <Component id="txDto" min="-2" pref="121" max="-2" attributes="0"/>
-                                  <Component id="txPrecio" min="-2" pref="121" max="-2" attributes="0"/>
-                                  <Component id="txCantidad" min="-2" pref="121" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="btAddLin" alignment="1" min="-2" pref="77" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cbRef" min="-2" pref="121" max="-2" attributes="0"/>
-                                  <Component id="cbDescripcion" min="-2" pref="210" max="-2" attributes="0"/>
-                                  <Component id="txLineaFac" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="btDeleteLin" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbNumFac" min="-2" pref="85" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btCalculoLineas" min="-2" pref="123" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="btAddLin" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel21" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txIva" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
+                          <Component id="txCantidad" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
+                          <Component id="cbRef" min="-2" pref="121" max="-2" attributes="0"/>
+                          <Component id="cbDescripcion" min="-2" pref="210" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btDeleteLin" min="-2" pref="85" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btModifyLin" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="lbNumFac" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txLineaFac" alignment="0" pref="121" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="txPrecio" min="-2" pref="127" max="-2" attributes="0"/>
+                          <Component id="txDto" min="-2" pref="127" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="684" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -1151,27 +1142,23 @@
                           <Component id="jScrollPane5" pref="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btModifyLin" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btDeleteLin" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btAddLin" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btModifyLin" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="btAddLin" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btDeleteLin" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lbNumFac" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
-                                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                                      <Component id="btCalculoLineas" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lbNumFac" min="-2" pref="26" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txLineaFac" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
@@ -1348,14 +1335,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbNumFac">
-            </Component>
-            <Component class="javax.swing.JButton" name="btCalculoLineas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Calcular Factura"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="1"/>
+                </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCalculoLineasActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1365,6 +1349,8 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                      <Component id="btCalculoLineas" min="-2" pref="123" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="txBuscarLin" min="-2" pref="141" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1376,10 +1362,11 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btBuscarLin" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txBuscarLin" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btCalculoLineas" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -1395,6 +1382,14 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txBuscarLin">
+            </Component>
+            <Component class="javax.swing.JButton" name="btCalculoLineas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Calcular Factura"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCalculoLineasActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1455,6 +1450,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ayuda gesti&#xf3;n desglose facturas"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAyudaLineasActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -1666,26 +1664,26 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane7" pref="863" max="32767" attributes="0"/>
+                      <Component id="jScrollPane7" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="294" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="235" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane7" min="-2" pref="321" max="-2" attributes="0"/>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <Component id="jScrollPane7" min="-2" pref="261" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1703,7 +1701,7 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Courier New" size="18" style="0"/>
+                      <Font name="Courier New" size="14" style="0"/>
                     </Property>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="text" type="java.lang.String" value="Se encuentra usted en la p&#xe1;gina de inicio de gesti&#xf3;n de su tienda,&#xa; donde podr&#xe1; realizar las siguientes actiones:&#xa;&#x9;&#xa;&#x9;*Gesti&#xf3;n de Clientes:&#xa;&#x9;&#x9;- Podr&#xe1; agregar, borrar o modifcar los datos sus clientes.&#xa;&#x9;&#x9;- Tendr&#xe1; acceso a las facturas realcionadas con sus clientes.&#xa;&#x9;&#x9;- Obtener estad&#xed;sticas de ventas.&#xa;&#x9;*Gesti&#xf3;n  de Facturas:&#xa;&#x9;&#x9;- Podr&#xe1; agregar, borrar o modifcar las facturas.&#xa;&#x9;&#x9;- Acceder al desglose de  cada factura.&#xa;&#x9;&#x9;- Calcular el total de cada factura.&#xa;&#x9;*Gesti&#xf3;n  de Stock:&#xa;&#x9;&#x9;- Podr&#xe1; agregar, borrar o modifcar los datos sus art&#xed;culos.&#xa;&#x9;&#x9;&#xa;&#xa;&#x9;&#xa;&#x9;"/>
@@ -1714,7 +1712,7 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Imprint MT Shadow" size="48" style="1"/>
+                  <Font name="Lucida Bright" size="48" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bienvedido"/>
               </Properties>
@@ -1742,8 +1740,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel12" min="-2" pref="68" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jPanel14" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -1756,10 +1754,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="233" max="32767" attributes="0"/>
-                      <Component id="jTextField2" min="-2" pref="174" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1767,17 +1765,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Imprint MT Shadow" size="48" style="0"/>
+                  <Font name="Lucida Bright" size="48" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Clientes"/>
               </Properties>
@@ -1791,14 +1789,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane8" max="32767" attributes="0"/>
+                      <Component id="jScrollPane8" min="-2" pref="927" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane8" pref="305" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jScrollPane8" min="-2" pref="361" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1814,8 +1814,337 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="jTextArea2">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Courier New" size="14" style="0"/>
+                    </Property>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="Manual de uso ventana gesti&#xf3;n de clientes:&#xa;&#xa;&#x9;* Para a&#xf1;adir un cliente debe rellenar todos los campos y pulsar el boton &quot;A&#xf1;adir&quot;.&#xa;&#x9;    Tras ser a&#xf1;adido tenga en cuenta que la tabla mostrar&#xe1; &#xfa;nicamente el cliente a&#xf1;adido, &#xa;&#x9;    si quiere volver a ver todos los clientes, porfavor refresque la tabla en el boton &quot;Actializar tabla&quot;.&#xa;&#x9;* Para eliminar debe selecionar un cliente en la tabla y pulsar &quot;Eliminar&quot;.&#xa;&#x9;* Para modificar un cliente debe selecionar un cliente en la tabla, modificar sus campos &#xa;&#x9;     y pulsar &quot;Modificar&quot;.&#xa;&#x9;&#xa;&#x9;* Para consultar las facturas asociada a un cliente, selecione el cliente en la tabla&#xa;&#x9;    y a continuaci&#xf3;n pulse &quot;Consultar Factuas Cliente&quot;. Este boton le abrir&#xe1; directamente &#xa;&#x9;    la ventana de facturas con &#xfa;nicamente las facturas del cliente selecionado.&#xa;&#xa;&#x9;* Para ver las estad&#xed;sticas de venta, pulse directamente en el boton &quot;Estad&#xed;ticas Clientes&quot;,&#xa;&#x9;   este abrir&#xe1; una ventana donde:&#xa;&#x9;&#x9;- Debe seleccionar un rago de entre dos clientes en los menus desplegables&#xa;&#x9;&#x9;- Debe insertar dos fechas en los recuadros marcados como fecha&#xa;&#x9;&#x9;- Obtendr&#xe1; un resultado basados en los datos anteriores.&#xa;&#x9;"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JDialog" name="jdHelpFacturas">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jPanel16" max="32767" attributes="0"/>
+                      <Component id="jPanel15" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel16" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel15">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="253" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel9">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Lucida Bright" size="48" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n Facturas"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel16">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane9" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane9" pref="299" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane9">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jTextArea3">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Courier New" size="14" style="0"/>
+                    </Property>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="Ayuda gesti&#xf3;n de facturas:&#xa;&#x9;&#xa;&#x9;* Para agregar una nueva factura rellene todos los campos y pulse &quot;A&#xf1;adir&quot;, tenga en cuenta&#xa;&#x9;   que tras agregar una factura para su comodidad de identificacion y verificacion de que se agreg&#xf3;&#xa;&#x9;   correctamente en la tabla s&#xf3;lo aparecer&#xe1; esta nueva factura, si desea ver todas las facturas porfavor&#xa;&#x9;   refresque la tabla en el boton &quot;Actualizar tabla&quot;.&#xa;&#x9;&#xa;&#x9;* Para borrar una factura, seleccione un resgistro de la tabla y pulse &quot;Eliminar&quot;, tenga en cuenta&#xa;&#x9;   que una factura no podr&#xe1; ser eliminada si tiene art&#xed;culos a&#xf1;adidos.&#xa;&#xa;&#x9;* Para modificar una factura elija una factura de la tabla y modifique sus campos &quot;Fecha&quot; y &quot;DNI-CIF&quot;.&#xa;&#xa;&#x9;* Si desea buscar una factura en concreto intoduzca el n&#xfa;mero de factura en la varra de b&#xfa;squeda&#xa;&#x9;   y pulse &quot;Buscar&quot; (refresque la tabla para ver todas las facturas de nuevo).&#xa;&#xa;&#x9;* En el caso de que quiera desglosar los detalles de una factura, seleccione una factura en la tabla&#xa;&#x9;   y pulse &quot;Detalles facturas&quot;, esto le abrir&#xe1; directamente la ventana de la factura desglosada.&#xa;&#xa;&#x9;* Usted puede calcular el costo total de una factura simplemente seleccionando una en la tabla&#xa;&#x9;   y a continuaci&#xf3;n presionar &quot;Calcular total&quot;.&#xa;&#xa;&#x9;*Si lo que desea es importar o exportar una factura:&#xa;&#x9;&#xa;&#x9;&#x9;- Para exportar, elija una factura en la tabla, pulse &quot;Exportar&quot; y selecione el directorio&#xa;&#x9;&#x9;   donde quiere guardar el archivo.&#xa;&#x9;&#x9;- Para importar, pulse directamente &quot;Importar&quot; y seleccione desde su equipo el &#xa;&#x9;&#x9;   archivo que desea importar.&#xa;&#xa;Para gestionar Clientes o Articulos porfavor pulse en el men&#xfa; Opciones y seleccione a donde quiere dirijirse.&#xa;"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JDialog" name="jdHelpArticulos">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jPanel18" max="32767" attributes="0"/>
+                      <Component id="jPanel17" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel18" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel17">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
+                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="213" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel14">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Lucida Bright" size="48" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Art&#xed;culos"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel18">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane10" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane10" pref="279" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane10">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jTextArea4">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Courier New" size="14" style="0"/>
+                    </Property>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="Ayuda gesti&#xf3;n de stock:&#xa;&#x9;&#xa;&#x9;* Para a&#xf1;adir un art&#xed;culo rellene todos los campos y pulse &quot;A&#xf1;adir&quot;, &#xa;&#x9;  (refresque la tabla para ver todos los at&#xed;culos de nuevo).&#xa;&#x9;&#xa;&#x9;* Para eliminar un art&#xed;culo selecione un registro de la tabla y pulse &quot;Eliminar&quot;.&#xa;&#x9;   Teng en cuenta que un art&#xed;culo asociado a una factura no podr&#xe1; ser eliminado.&#xa;&#x9;&#xa;&#x9;* Proceda a modificar un art&#xed;culo seleccionando un registro en la tabla cambie los campos &#xa;&#x9;  deseados y pulse &quot;Modificar&quot;, para modificar un art&#xed;culo debe haber existencias del mismo.&#xa;&#xa;&#x9;* Real&#xed;ce b&#xfa;squeda rellenando la barra del buscardor con el n&#xfa;mero de referencia del art&#xed;culo.&#xa;&#xa;Para gestionar Clientes o Faturas dir&#xed;jase al men&#xfa; de Opciones y seleccione donde quiere dirijirse."/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JDialog" name="jdHelpLineas">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jPanel20" max="32767" attributes="0"/>
+                      <Component id="jPanel19" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel19" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel20" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel19">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="175" max="32767" attributes="0"/>
+                      <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="19" max="32767" attributes="0"/>
+                      <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel26">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Lucida Bright" size="48" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de L&#xed;neas de Factura"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel20">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane11" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane11" pref="457" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane11">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jTextArea5">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Courier New" size="14" style="0"/>
+                    </Property>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="Ayuda gesti&#xf3;n l&#xed;neas de factura:&#xa;&#x9;&#xa;&#x9;* Para agregar una l&#xed;nea de factura deber&#xe1; haber llegado aqu&#xed; tras haber seleccionado una factura en&#xa;&#x9;    la ventana de Facturas, rellene todos los campos y pulse &quot;A&#xf1;adir&quot;, si selecciona en los&#xa;&#x9;    desplegables de &quot;Descripci&#xf3;n&quot; o &quot;Referencia&quot; los campos cantidad precio e iva autom&#xe1;ticamente&#xa;&#x9;    se rellenar&#xe1;n con la cantidad en stock disponible, el precio y el iva que le corresponden. Tenga en cuenta&#xa;&#x9;    que una factura no puede tener dos l&#xed;neas de factura con el mismo n&#xfa;mero.&#xa;&#x9;&#xa;&#x9;Si agrega una l&#xed;nea de factura con un art&#xed;culo del cual no dispone en tienda el programa le avisar&#xe1;.&#xa;&#x9;&#xa;&#x9;* Para eliminar una l&#xed;nea de factura selecione la l&#xed;nea en la tabla y pulse &quot;Eliminar&quot;. (Es stock se modificar&#xe1;&#xa;&#x9;    autom&#xe1;ticamente).&#xa;&#xa;&#x9;* Para modificar una l&#xed;nea de factura seleccione la l&#xed;nea en la tabla y pulse &quot;Modificar&quot;. (El programa le avisar&#xe1; &#xa;&#x9;    en caso de que no disponga de m&#xe1;s unidades de ese art&#xed;culo o modificar&#xe1; la cantidad del mismo en el stock).&#xa;&#xa;&#x9;* Si ha seleccionado una factura en la ventana de Facturas, desde la gesti&#xf3;n del desglose de &#xe9;sta podr&#xe1; calcular&#xa;&#x9;    su total, pulse &quot;Calcular Factura&quot;, esta acci&#xf3;n har&#xe1; que el programa nuevamente le lleve hasta la ventana de &#xa;&#x9;    Facturas con el c&#xe1;culo total de la misma.&#xa;&#xa;&#x9;* Si desea buscar una l&#xed;nea de factura de una factura en concreto, debe asegurase de haber seleccionado una &#xa;&#x9;    factura en la ventana de Facturas, a continuaci&#xf3;n proceda a insertar el n&#xfa;mero de l&#xed;nea esacto en la barra del&#xa;&#x9;    buscador y por &#xfa;ltimo presione &quot;Buscar&quot;.&#xa;&#xa;Tenga en cuenta que siempre puede acceder a la ventana de Facturas, Clientes o Stock desde el men&#xfa; de Opciones.&#xa;&#xa;&#x9;   &#xa;&#xa;&#x9;&#xa;&#x9;"/>
                   </Properties>
                 </Component>
               </SubComponents>

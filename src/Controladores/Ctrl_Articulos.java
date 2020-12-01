@@ -128,5 +128,21 @@ public class Ctrl_Articulos {
         }
         return la;
     }
+    
+    public List bucarInfoArticulo(String des){
+        List<Articulos> la = new ArrayList<Articulos>();
+        try{
+            operar();
+            Query hql = ss.createQuery("from Articulos where descripcion = :des");
+            hql.setParameter("des", des);
+            la = hql.list();
+            tx.commit();
+        }catch(HibernateException he){
+            JOptionPane.showMessageDialog(null, "" + he.getMessage());
+        }finally{
+            ss.close();
+        }
+        return la;
+    }
 
 }
