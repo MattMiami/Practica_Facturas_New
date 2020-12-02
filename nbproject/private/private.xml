@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/AD_TEMA_03_FACTURAS/Practica_Facturas_New/src/Controladores/ImportarXml.java</file>
+            <file>file:/C:/AD_TEMA_03_FACTURAS/Practica_Facturas_New/src/Controladores/Ctrl_Clientes.java</file>
             <file>file:/C:/AD_TEMA_03_FACTURAS/Practica_Facturas_New/src/Vista/Main.java</file>
-            <file>file:/C:/AD_TEMA_03_FACTURAS/Practica_Facturas_New/src/Controladores/Procedure.java</file>
+            <file>file:/C:/AD_TEMA_03_FACTURAS/Practica_Facturas_New/src/Modelos/Clientes.java</file>
         </group>
     </open-files>
 </project-private>
