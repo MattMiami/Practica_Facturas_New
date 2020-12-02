@@ -1953,11 +1953,6 @@ public class Main extends javax.swing.JFrame {
         menuBar.add(menuOpciones);
 
         jMenu2.setText("Help");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
-            }
-        });
 
         itemInicio.setText("Ayuda Inicio");
         itemInicio.addActionListener(new java.awt.event.ActionListener() {
@@ -2434,9 +2429,7 @@ public class Main extends javax.swing.JFrame {
                         cf.addToFacturaTot(ft);
                         modelFac.setRowCount(0);
                         modelFac.addRow(new Object[]{f2.getNumfac(), f2.getFechaFormat(), f2.getClientes().getDnicif(), f2.getFacturasTot(), f2.getFacturasLins()});
-                        cbDescripcion.removeAllItems();
                         cbRef.removeAllItems();
-                        cf.fillComboDescripcion(cbDescripcion);
                         cf.fillComboRef(cbRef);
                     }
                 }
@@ -2696,16 +2689,20 @@ public class Main extends javax.swing.JFrame {
                 int i = jTableLinea.getSelectedRow();
                 Long l = Long.parseLong(jTableLinea.getValueAt(i, 3).toString());
                 BigDecimal cantidadActual = BigDecimal.valueOf(l);
+
                 /*
-                Modificamos la linea
-                 */
- /*
                 Comprobamos el stock en tienda
                  */
                 if (a.getStock().subtract(can).signum() < 0) {
+
                     JOptionPane.showMessageDialog(null, "Out of Stock. "
-                            + " Disponemos de " + a.getStock() + " unidad(es) en tienda.");
+                            + " Disponemos de " + a.getStock() + " unidad(es) en tienda."
+                            + " Si desea modificar la cantidad del artículo, porfavor,"
+                            + " vuelva a crear la línea con la cantidad deseada.");
                 } else {
+                    /*
+                Modificamos la linea
+                     */
                     if (cf.modifyFacturaLin(fl)) {
                         /*
                     Actualizamos la tabla Lineas de facturas
@@ -2731,8 +2728,8 @@ public class Main extends javax.swing.JFrame {
                         }
                     }
                     /*modificamos el stock del artículo, si añadimos más unidades 
-                restará a la cantidad total del stock, si por el contrario quitamos
-                unidades de la linea de factura sumará esas cantidades al stock.
+                    restará a la cantidad total del stock, si por el contrario quitamos
+                    unidades de la linea de factura sumará esas cantidades al stock.
                      */
                     if (cantidadActual.compareTo(can) < 0) {
                         a.setStock(a.getStock().subtract(can));
@@ -2756,16 +2753,19 @@ public class Main extends javax.swing.JFrame {
 
     private void cbDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDescripcionActionPerformed
         /*
-        Buscamos el artículo por descripcion
+        Buscamos el artículo por descripción
          */
-        List articulo = ca.bucarInfoArticulo(cbDescripcion.getSelectedItem().toString());
-        for (Iterator it = articulo.iterator(); it.hasNext();) {
-            Articulos a = (Articulos) it.next();
-            cbRef.setSelectedItem(a.getReferencia());
-            txCantidad.setText(a.getStock().toString());
-            txPrecio.setText(a.getPrecio().toString());
-            txIva.setText(a.getPorciva().toString());
+        try {
+            List articulo = ca.bucarInfoArticulo(cbDescripcion.getSelectedItem().toString());
+            for (Iterator it = articulo.iterator(); it.hasNext();) {
+                Articulos a = (Articulos) it.next();
+                cbRef.setSelectedItem(a.getReferencia());
+                txCantidad.setText(a.getStock().toString());
+                txPrecio.setText(a.getPrecio().toString());
+                txIva.setText(a.getPorciva().toString());
 
+            }
+        } catch (NullPointerException n) {
         }
 
 
@@ -2856,7 +2856,7 @@ public class Main extends javax.swing.JFrame {
             month2 = Integer.parseInt(txFechaDos.getText().substring(3, 5));
             year2 = Integer.parseInt(txFechaDos.getText().substring(6, 10));
             date2 = new java.sql.Date(year2 - 1900, month2 - 1, day2);
-            
+
             //Ejecutamos el procedimiento
             p.Procedure(
                     cbClienteUno.getSelectedItem().toString(),
@@ -2878,7 +2878,7 @@ public class Main extends javax.swing.JFrame {
                     e.getSumaTotales()});
             }
         } catch (StringIndexOutOfBoundsException si) {
-            
+
         }
 
     }//GEN-LAST:event_btMostrarEstadisticasActionPerformed
@@ -2886,7 +2886,7 @@ public class Main extends javax.swing.JFrame {
     private void btExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExportarActionPerformed
         /*
         Exportamos el registro seleccionado en la tabla de facturas
-        */
+         */
         try {
             int i = jTableCab.getSelectedRow();
             Long numFac = Long.parseLong(jTableCab.getValueAt(i, 0).toString());
@@ -3016,10 +3016,6 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor verifique que ha introducido el número de línea de forma numérica. Además tenga en cuenta que para buscar una línea de factura debe elegir una factura en la ventana de Facturas.");
         }
     }//GEN-LAST:event_btBuscarLinActionPerformed
-
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-
-    }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void itemInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemInicioActionPerformed
         jdHelpInicio.setVisible(true);
