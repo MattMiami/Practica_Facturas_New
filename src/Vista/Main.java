@@ -1584,11 +1584,11 @@ public class Main extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("Se encuentra usted en la página de inicio de gestión de su tienda,\n donde podrá realizar las siguientes actiones:\n\t\n\t*Gestión de Clientes:\n\t\t- Podrá agregar, borrar o modifcar los datos sus clientes.\n\t\t- Tendrá acceso a las facturas realcionadas con sus clientes.\n\t\t- Obtener estadísticas de ventas.\n\t*Gestión  de Facturas:\n\t\t- Podrá agregar, borrar o modifcar las facturas.\n\t\t- Acceder al desglose de  cada factura.\n\t\t- Calcular el total de cada factura.\n\t*Gestión  de Stock:\n\t\t- Podrá agregar, borrar o modifcar los datos sus artículos.\n\t\t\n\n\t\n\t");
+        jTextArea1.setText("\n\nSe encuentra usted en la página de inicio de gestión de su tienda,\n donde podrá realizar las siguientes actiones:\n\t\n\t*Gestión de Clientes:\n\t\t- Podrá agregar, borrar o modifcar los datos sus clientes.\n\t\t- Tendrá acceso a las facturas realcionadas con sus clientes.\n\t\t- Obtener estadísticas de ventas.\n\t*Gestión  de Facturas:\n\t\t- Podrá agregar, borrar o modifcar las facturas.\n\t\t- Acceder al desglose de  cada factura.\n\t\t- Calcular el total de cada factura.\n\t*Gestión  de Stock:\n\t\t- Podrá agregar, borrar o modifcar los datos sus artículos.\n\t\t");
         jScrollPane7.setViewportView(jTextArea1);
 
         jLabel3.setFont(new java.awt.Font("Lucida Bright", 1, 48)); // NOI18N
-        jLabel3.setText("Bienvedido");
+        jLabel3.setText("Ayuda de Inicio");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1596,12 +1596,12 @@ public class Main extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane7)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(235, 235, 235)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addGap(177, 177, 177))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1609,7 +1609,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

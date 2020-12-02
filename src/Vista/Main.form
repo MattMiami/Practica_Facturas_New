@@ -1666,13 +1666,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane7" max="32767" attributes="0"/>
+                      <Component id="jScrollPane7" pref="750" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="235" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1682,7 +1682,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane7" min="-2" pref="261" max="-2" attributes="0"/>
+                      <Component id="jScrollPane7" min="-2" pref="304" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -1704,7 +1704,7 @@
                       <Font name="Courier New" size="14" style="0"/>
                     </Property>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="Se encuentra usted en la p&#xe1;gina de inicio de gesti&#xf3;n de su tienda,&#xa; donde podr&#xe1; realizar las siguientes actiones:&#xa;&#x9;&#xa;&#x9;*Gesti&#xf3;n de Clientes:&#xa;&#x9;&#x9;- Podr&#xe1; agregar, borrar o modifcar los datos sus clientes.&#xa;&#x9;&#x9;- Tendr&#xe1; acceso a las facturas realcionadas con sus clientes.&#xa;&#x9;&#x9;- Obtener estad&#xed;sticas de ventas.&#xa;&#x9;*Gesti&#xf3;n  de Facturas:&#xa;&#x9;&#x9;- Podr&#xe1; agregar, borrar o modifcar las facturas.&#xa;&#x9;&#x9;- Acceder al desglose de  cada factura.&#xa;&#x9;&#x9;- Calcular el total de cada factura.&#xa;&#x9;*Gesti&#xf3;n  de Stock:&#xa;&#x9;&#x9;- Podr&#xe1; agregar, borrar o modifcar los datos sus art&#xed;culos.&#xa;&#x9;&#x9;&#xa;&#xa;&#x9;&#xa;&#x9;"/>
+                    <Property name="text" type="java.lang.String" value="&#xa;&#xa;Se encuentra usted en la p&#xe1;gina de inicio de gesti&#xf3;n de su tienda,&#xa; donde podr&#xe1; realizar las siguientes actiones:&#xa;&#x9;&#xa;&#x9;*Gesti&#xf3;n de Clientes:&#xa;&#x9;&#x9;- Podr&#xe1; agregar, borrar o modifcar los datos sus clientes.&#xa;&#x9;&#x9;- Tendr&#xe1; acceso a las facturas realcionadas con sus clientes.&#xa;&#x9;&#x9;- Obtener estad&#xed;sticas de ventas.&#xa;&#x9;*Gesti&#xf3;n  de Facturas:&#xa;&#x9;&#x9;- Podr&#xe1; agregar, borrar o modifcar las facturas.&#xa;&#x9;&#x9;- Acceder al desglose de  cada factura.&#xa;&#x9;&#x9;- Calcular el total de cada factura.&#xa;&#x9;*Gesti&#xf3;n  de Stock:&#xa;&#x9;&#x9;- Podr&#xe1; agregar, borrar o modifcar los datos sus art&#xed;culos.&#xa;&#x9;&#x9;"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1714,7 +1714,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Lucida Bright" size="48" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Bienvedido"/>
+                <Property name="text" type="java.lang.String" value="Ayuda de Inicio"/>
               </Properties>
             </Component>
           </SubComponents>
