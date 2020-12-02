@@ -8,7 +8,6 @@ package Controladores;
 import Modelos.Articulos;
 import Modelos.FacturasCab;
 import Modelos.FacturasLin;
-import Modelos.FacturasLinId;
 import Modelos.FacturasTot;
 import java.util.ArrayList;
 import java.util.List;

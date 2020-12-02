@@ -2332,6 +2332,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btFacAsociadasActionPerformed
 
     private void jTableCabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCabMouseClicked
+        try{
         int i = jTableCab.getSelectedRow();
         txNumFacCab.setText(modelFac.getValueAt(i, 0).toString());
         txFecha.setText(modelFac.getValueAt(i, 1).toString());
@@ -2399,6 +2400,9 @@ public class Main extends javax.swing.JFrame {
                 }
 
             }
+        }
+        }catch(NullPointerException n){
+            
         }
 
 
@@ -2789,6 +2793,8 @@ public class Main extends javax.swing.JFrame {
             });
         } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una factura para calcular su total");
+        }catch(NullPointerException n){
+            
         }
 
 
@@ -2920,7 +2926,9 @@ public class Main extends javax.swing.JFrame {
 
     private void btImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportarActionPerformed
         try {
-            ImportarXml importar = new ImportarXml(jTableCab);
+            int i = jTableCab.getSelectedRow();
+            ImportarXml importar = new ImportarXml(jTableCab,jTableLinea, jTableClientes);
+            
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
@@ -2928,6 +2936,7 @@ public class Main extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_btImportarActionPerformed
 
     private void btBuscarArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarArtActionPerformed
